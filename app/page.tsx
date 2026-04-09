@@ -76,18 +76,9 @@ your world.
               </div>
             </div>
             <div className="mt-16 grid grid-cols-3 gap-8 max-w-lg">
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-yellow-400">Licensed</div>
-              <div className="text-sm text-yellow-300 mt-1">& insured</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-yellow-400">24/7</div>
-              <div className="text-sm text-yellow-300 mt-1">Emergency</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-yellow-400">15K+</div>
-              <div className="text-sm text-yellow-300 mt-1">Jobs done</div>
-            </div>
+            <div className="text-center"><div className="text-3xl md:text-4xl font-bold text-yellow-400">Licensed</div><div className="text-sm text-yellow-300 mt-1">& insured</div></div>
+            <div className="text-center"><div className="text-3xl md:text-4xl font-bold text-yellow-400">24/7</div><div className="text-sm text-yellow-300 mt-1">Emergency</div></div>
+            <div className="text-center"><div className="text-3xl md:text-4xl font-bold text-yellow-400">15K+</div><div className="text-sm text-yellow-300 mt-1">Jobs done</div></div>
             </div>
           </div>
         </section>
@@ -99,36 +90,30 @@ your world.
               <h2 id="services-heading" className="text-4xl md:text-5xl font-bold">Our Services</h2>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <article className="bg-yellow-900 border border-yellow-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 group">
-              <div className="text-4xl mb-4" aria-hidden="true">🏠</div>
+            <article className="bg-yellow-900 border border-yellow-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300">
+              <div className="text-4xl mb-4">🏠</div>
               <h3 className="text-xl font-bold mb-3 text-yellow-50">Residential</h3>
-              <p className="text-yellow-300 leading-relaxed">Wiring, panels, outlets.</p>
-            </article>
-            <article className="bg-yellow-900 border border-yellow-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 group">
-              <div className="text-4xl mb-4" aria-hidden="true">🏢</div>
+              <p className="text-yellow-300 leading-relaxed">Wiring, panels, outlets.</p></article>
+            <article className="bg-yellow-900 border border-yellow-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300">
+              <div className="text-4xl mb-4">🏢</div>
               <h3 className="text-xl font-bold mb-3 text-yellow-50">Commercial</h3>
-              <p className="text-yellow-300 leading-relaxed">Office and retail electrical.</p>
-            </article>
-            <article className="bg-yellow-900 border border-yellow-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 group">
-              <div className="text-4xl mb-4" aria-hidden="true">⚡</div>
+              <p className="text-yellow-300 leading-relaxed">Office and retail electrical.</p></article>
+            <article className="bg-yellow-900 border border-yellow-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300">
+              <div className="text-4xl mb-4">⚡</div>
               <h3 className="text-xl font-bold mb-3 text-yellow-50">EV Chargers</h3>
-              <p className="text-yellow-300 leading-relaxed">Home and commercial charging.</p>
-            </article>
-            <article className="bg-yellow-900 border border-yellow-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 group">
-              <div className="text-4xl mb-4" aria-hidden="true">🔌</div>
+              <p className="text-yellow-300 leading-relaxed">Home and commercial charging.</p></article>
+            <article className="bg-yellow-900 border border-yellow-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300">
+              <div className="text-4xl mb-4">🔌</div>
               <h3 className="text-xl font-bold mb-3 text-yellow-50">Generator</h3>
-              <p className="text-yellow-300 leading-relaxed">Installation and maintenance.</p>
-            </article>
-            <article className="bg-yellow-900 border border-yellow-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 group">
-              <div className="text-4xl mb-4" aria-hidden="true">💡</div>
+              <p className="text-yellow-300 leading-relaxed">Installation and maintenance.</p></article>
+            <article className="bg-yellow-900 border border-yellow-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300">
+              <div className="text-4xl mb-4">💡</div>
               <h3 className="text-xl font-bold mb-3 text-yellow-50">Lighting</h3>
-              <p className="text-yellow-300 leading-relaxed">LED upgrades and design.</p>
-            </article>
-            <article className="bg-yellow-900 border border-yellow-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 group">
-              <div className="text-4xl mb-4" aria-hidden="true">🔍</div>
+              <p className="text-yellow-300 leading-relaxed">LED upgrades and design.</p></article>
+            <article className="bg-yellow-900 border border-yellow-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300">
+              <div className="text-4xl mb-4">🔍</div>
               <h3 className="text-xl font-bold mb-3 text-yellow-50">Inspections</h3>
-              <p className="text-yellow-300 leading-relaxed">Safety and code compliance.</p>
-            </article>
+              <p className="text-yellow-300 leading-relaxed">Safety and code compliance.</p></article>
             </div>
           </div>
         </section>
@@ -142,28 +127,16 @@ your world.
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-yellow-900 border border-yellow-800 rounded-2xl p-6 text-center">
               <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-yellow-400/20 flex items-center justify-center text-2xl font-bold text-yellow-400">TH</div>
-              <h3 className="font-bold text-yellow-50">Tom Henderson</h3>
-              <p className="text-sm text-yellow-400">Master Electrician</p>
-              <p className="text-sm text-yellow-300 mt-1">30yr licensed</p>
-            </div>
+              <h3 className="font-bold text-yellow-50">Tom Henderson</h3><p className="text-sm text-yellow-400">Master Electrician</p><p className="text-sm text-yellow-300 mt-1">30yr licensed</p></div>
             <div className="bg-yellow-900 border border-yellow-800 rounded-2xl p-6 text-center">
               <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-yellow-400/20 flex items-center justify-center text-2xl font-bold text-yellow-400">CM</div>
-              <h3 className="font-bold text-yellow-50">Carlos Mendez</h3>
-              <p className="text-sm text-yellow-400">Journeyman</p>
-              <p className="text-sm text-yellow-300 mt-1">Commercial specialist</p>
-            </div>
+              <h3 className="font-bold text-yellow-50">Carlos Mendez</h3><p className="text-sm text-yellow-400">Journeyman</p><p className="text-sm text-yellow-300 mt-1">Commercial specialist</p></div>
             <div className="bg-yellow-900 border border-yellow-800 rounded-2xl p-6 text-center">
               <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-yellow-400/20 flex items-center justify-center text-2xl font-bold text-yellow-400">SW</div>
-              <h3 className="font-bold text-yellow-50">Sarah Walsh</h3>
-              <p className="text-sm text-yellow-400">Residential Lead</p>
-              <p className="text-sm text-yellow-300 mt-1">Panel expert</p>
-            </div>
+              <h3 className="font-bold text-yellow-50">Sarah Walsh</h3><p className="text-sm text-yellow-400">Residential Lead</p><p className="text-sm text-yellow-300 mt-1">Panel expert</p></div>
             <div className="bg-yellow-900 border border-yellow-800 rounded-2xl p-6 text-center">
               <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-yellow-400/20 flex items-center justify-center text-2xl font-bold text-yellow-400">JK</div>
-              <h3 className="font-bold text-yellow-50">James Kim</h3>
-              <p className="text-sm text-yellow-400">EV Specialist</p>
-              <p className="text-sm text-yellow-300 mt-1">ChargePoint certified</p>
-            </div>
+              <h3 className="font-bold text-yellow-50">James Kim</h3><p className="text-sm text-yellow-400">EV Specialist</p><p className="text-sm text-yellow-300 mt-1">ChargePoint certified</p></div>
             </div>
           </div>
         </section>
@@ -176,26 +149,14 @@ your world.
             </div>
             <div className="space-y-4">
             <details className="group border border-current/10 rounded-xl p-5 cursor-pointer">
-              <summary className="font-medium flex justify-between items-center list-none text-yellow-50">
-                Emergency?
-                <span className="ml-4 text-yellow-300 group-open:rotate-45 transition-transform text-xl">+</span>
-              </summary>
-              <p className="mt-3 text-yellow-300 text-sm leading-relaxed">24/7 service, 60min response.</p>
-            </details>
+              <summary className="font-medium flex justify-between items-center list-none text-yellow-50">Emergency?<span className="ml-4 text-yellow-300 group-open:rotate-45 transition-transform text-xl">+</span></summary>
+              <p className="mt-3 text-yellow-300 text-sm leading-relaxed">24/7 service, 60min response.</p></details>
             <details className="group border border-current/10 rounded-xl p-5 cursor-pointer">
-              <summary className="font-medium flex justify-between items-center list-none text-yellow-50">
-                Free estimate?
-                <span className="ml-4 text-yellow-300 group-open:rotate-45 transition-transform text-xl">+</span>
-              </summary>
-              <p className="mt-3 text-yellow-300 text-sm leading-relaxed">Yes, all estimates free.</p>
-            </details>
+              <summary className="font-medium flex justify-between items-center list-none text-yellow-50">Free estimate?<span className="ml-4 text-yellow-300 group-open:rotate-45 transition-transform text-xl">+</span></summary>
+              <p className="mt-3 text-yellow-300 text-sm leading-relaxed">Yes, all estimates free.</p></details>
             <details className="group border border-current/10 rounded-xl p-5 cursor-pointer">
-              <summary className="font-medium flex justify-between items-center list-none text-yellow-50">
-                Licensed?
-                <span className="ml-4 text-yellow-300 group-open:rotate-45 transition-transform text-xl">+</span>
-              </summary>
-              <p className="mt-3 text-yellow-300 text-sm leading-relaxed">Master electrician, fully insured.</p>
-            </details>
+              <summary className="font-medium flex justify-between items-center list-none text-yellow-50">Licensed?<span className="ml-4 text-yellow-300 group-open:rotate-45 transition-transform text-xl">+</span></summary>
+              <p className="mt-3 text-yellow-300 text-sm leading-relaxed">Master electrician, fully insured.</p></details>
             </div>
           </div>
         </section>
@@ -207,18 +168,9 @@ your world.
                 <p className="text-yellow-400 text-sm tracking-widest uppercase mb-3">Get In Touch</p>
                 <h2 id="contact-heading" className="text-4xl md:text-5xl font-bold mb-6">Schedule Service</h2>
                 <div className="space-y-6 text-yellow-300">
-                  <div>
-                    <div className="font-bold text-yellow-50">Phone</div>
-                    <a href="tel:(555) 567-8902" className="hover:text-yellow-400 transition-colors">(555) 567-8902</a>
-                  </div>
-                  <div>
-                    <div className="font-bold text-yellow-50">Address</div>
-                    <p className="whitespace-pre-line">Serving Metro Atlanta, GA</p>
-                  </div>
-                  <div>
-                    <div className="font-bold text-yellow-50">Hours</div>
-                    <p>24/7 Emergency Available</p>
-                  </div>
+                  <div><div className="font-bold text-yellow-50">Phone</div><a href="tel:(555) 567-8902" className="hover:text-yellow-400">(555) 567-8902</a></div>
+                  <div><div className="font-bold text-yellow-50">Address</div><p>Serving Metro Atlanta, GA</p></div>
+                  <div><div className="font-bold text-yellow-50">Hours</div><p>24/7 Emergency Available</p></div>
                 </div>
               </div>
               <div>
