@@ -40,7 +40,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="services" className="py-24 bg-stone-900/30" aria-labelledby="services-heading">
+        <section id="services" className="reveal py-24 bg-stone-900/30" aria-labelledby="services-heading">
           <div className="max-w-6xl mx-auto px-6">
             <div className="text-center mb-16"><h2 id="services-heading" className="text-4xl font-black uppercase">Services</h2></div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -63,7 +63,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="contact" className="py-16">
+        <section id="contact" className="reveal py-16">
           <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-6 text-center">
             <div className="bg-stone-900 border border-stone-800 rounded-xl p-8"><div className="text-3xl mb-3">📞</div><div className="font-bold text-lg">Emergency</div><a href="tel:(555) 567-8902" className="text-yellow-500 text-xl font-black hover:underline">(555) 567-8902</a><p className="text-stone-500 text-sm mt-2">24/7 availability</p></div>
             <div className="bg-stone-900 border border-stone-800 rounded-xl p-8"><div className="text-3xl mb-3">📍</div><div className="font-bold text-lg">Service Area</div><p className="text-stone-400">Metro Atlanta, GA<br />30-mile radius</p></div>
