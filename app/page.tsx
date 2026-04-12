@@ -66,20 +66,20 @@ export default function Home() {
       </div>
 
       {/* ========== NAVIGATION ========== */}
-      <nav className="sticky top-0 z-50 px-6 md:px-8 py-4 flex justify-between items-center" style={{ background: 'rgba(28,28,28,0.92)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border)' }}>
+      <nav role="navigation" className="sticky top-0 z-50 px-6 md:px-8 py-4 flex justify-between items-center" style={{ background: 'rgba(28,28,28,0.92)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border)' }}>
         <div>
           <h1 className="heading text-xl font-bold" style={{ color: 'var(--accent)' }}>VoltPro Electric</h1>
           <p className="text-[9px] tracking-[0.2em] uppercase" style={{ color: 'var(--body)' }}>Licensed Master Electrician · Austin, TX</p>
         </div>
         <div className="hidden md:flex gap-6 text-sm" style={{ color: 'var(--body)' }}>
           {['services', 'why-us', 'testimonials', 'faq', 'contact'].map(s => (
-            <button key={s} onClick={() => scrollTo(s)} className="capitalize hover:text-white transition-colors">{s.replace('-', ' ')}</button>
+            <button key={s} onClick={() => scrollTo(s)} className="capitalize hover:text-white transition-colors" aria-label={`Navigate to ${s}`}>{s.replace('-', ' ')}</button>
           ))}
         </div>
-        <button onClick={() => scrollTo('contact')} className="btn">Free Estimate</button>
+        <button onClick={() => scrollTo('contact')} aria-label="Navigate to contact" className="btn">Free Estimate</button>
       </nav>
 
-      <main>
+      <main role="main">
         {/* ========== HERO SECTION ========== */}
         <section className="hero py-24 px-6 md:px-8">
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
@@ -96,8 +96,8 @@ export default function Home() {
                 We believe in upfront pricing, clean workmanship, and doing the job right the first time — every time.
               </p>
               <div className="flex gap-4 flex-wrap">
-                <button onClick={() => scrollTo('contact')} className="btn">Get Free Estimate</button>
-                <button onClick={() => scrollTo('services')} className="btn-outline">View Services</button>
+                <button onClick={() => scrollTo('contact')} aria-label="Navigate to contact" className="btn">Get Free Estimate</button>
+                <button onClick={() => scrollTo('services')} aria-label="Navigate to services" className="btn-outline">View Services</button>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-14">
                 {[
@@ -125,11 +125,11 @@ export default function Home() {
         </section>
 
         {/* ========== SERVICES SECTION ========== */}
-        <section id="services" className="py-24 px-6 md:px-8 reveal section-alt">
+        <section id="services" aria-labelledby="services-heading" className="py-24 px-6 md:px-8 reveal section-alt">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <span className="badge mb-3">What We Do</span>
-              <h2 className="heading text-4xl font-bold mt-4">Our Electrical Services</h2>
+              <h2 id="services-heading" className="heading text-4xl font-bold mt-4">Our Electrical Services</h2>
               <p className="mt-4 max-w-2xl mx-auto" style={{ color: 'var(--body)' }}>
                 From simple repairs to complex installations, VoltPro Electric covers every aspect of residential and commercial electrical work. All services include permits, inspections, and our lifetime workmanship warranty.
               </p>
@@ -150,11 +150,11 @@ export default function Home() {
         </section>
 
         {/* ========== WHY CHOOSE US ========== */}
-        <section id="why-us" className="py-24 px-6 md:px-8 reveal">
+        <section id="why-us" aria-labelledby="why-us-heading" className="py-24 px-6 md:px-8 reveal">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <span className="badge mb-3">The VoltPro Difference</span>
-              <h2 className="heading text-4xl font-bold mt-4">Why Choose VoltPro Electric</h2>
+              <h2 id="why-us-heading" className="heading text-4xl font-bold mt-4">Why Choose VoltPro Electric</h2>
               <p className="mt-4 max-w-2xl mx-auto" style={{ color: 'var(--body)' }}>
                 Not all electricians are created equal. Here is what sets VoltPro apart from the rest.
               </p>
@@ -201,11 +201,11 @@ export default function Home() {
         </section>
 
         {/* ========== TESTIMONIALS ========== */}
-        <section id="testimonials" className="py-24 px-6 md:px-8 reveal">
+        <section id="testimonials" aria-labelledby="testimonials-heading" className="py-24 px-6 md:px-8 reveal">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <span className="badge mb-3">Reviews</span>
-              <h2 className="heading text-4xl font-bold mt-4">What Our Customers Say</h2>
+              <h2 id="testimonials-heading" className="heading text-4xl font-bold mt-4">What Our Customers Say</h2>
               <p className="mt-4 max-w-2xl mx-auto" style={{ color: 'var(--body)' }}>
                 Do not just take our word for it. Here is what Austin homeowners have to say about working with VoltPro Electric.
               </p>
@@ -228,11 +228,11 @@ export default function Home() {
         </section>
 
         {/* ========== FAQ SECTION ========== */}
-        <section id="faq" className="py-24 px-6 md:px-8 reveal section-alt">
+        <section id="faq" aria-labelledby="faq-heading" className="py-24 px-6 md:px-8 reveal section-alt">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-16">
               <span className="badge mb-3">Questions</span>
-              <h2 className="heading text-4xl font-bold mt-4">Frequently Asked Questions</h2>
+              <h2 id="faq-heading" className="heading text-4xl font-bold mt-4">Frequently Asked Questions</h2>
             </div>
             <div className="space-y-3">
               {faqs.map((faq, i) => (
@@ -270,11 +270,11 @@ export default function Home() {
         </section>
 
         {/* ========== CONTACT / ESTIMATE FORM ========== */}
-        <section id="contact" className="py-24 px-6 md:px-8 reveal" style={{ background: 'var(--dark)' }}>
+        <section id="contact" aria-labelledby="contact-heading" className="py-24 px-6 md:px-8 reveal" style={{ background: 'var(--dark)' }}>
           <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
             <div>
               <span className="badge mb-4">Get In Touch</span>
-              <h2 className="heading text-4xl font-bold mt-4 mb-6">Request a Free Estimate</h2>
+              <h2 id="contact-heading" className="heading text-4xl font-bold mt-4 mb-6">Request a Free Estimate</h2>
               <p className="mb-8 leading-relaxed" style={{ color: 'var(--body)' }}>
                 Tell us about your project and we will get back to you within 2 hours with an upfront estimate. No obligation, no hidden fees, no pressure. For emergencies, call us directly for immediate assistance.
               </p>
@@ -319,16 +319,16 @@ export default function Home() {
               ) : (
                 <form onSubmit={e => { e.preventDefault(); setSubmitted(true); }} className="card space-y-4">
                   <div className="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="Your Name *" required />
-                    <input type="tel" placeholder="Phone Number *" required />
+                    <input type="text" placeholder="Your Name *" aria-label="Your Name *" required />
+                    <input type="tel" placeholder="Phone Number *" aria-label="Phone Number *" required />
                   </div>
-                  <input type="email" placeholder="Email Address" />
-                  <input type="text" placeholder="Service Address" />
-                  <select defaultValue="">
+                  <input type="email" placeholder="Email Address" aria-label="Email Address" />
+                  <input type="text" placeholder="Service Address" aria-label="Service Address" />
+                  <select aria-label="Select option" defaultValue="">
                     <option value="" disabled>Select a Service</option>
                     {services.map(s => <option key={s.name} value={s.name}>{s.name}</option>)}
                   </select>
-                  <textarea rows={4} placeholder="Describe the work you need done. Include any relevant details like the age of your home, specific problems you are experiencing, or the scope of your project..." />
+                  <textarea rows={4} placeholder="Describe the work you need done. Include any relevant details like the age of your home, specific problems you are experiencing, or the scope of your project..." aria-label="Describe the work you need done. Include any relevant details like the age of your home, specific problems you are experiencing, or the scope of your project" />
                   <button type="submit" className="btn w-full text-center py-4">REQUEST FREE ESTIMATE</button>
                   <p className="text-xs text-center" style={{ color: 'var(--body)' }}>No obligation. We respond within 2 hours.</p>
                 </form>
