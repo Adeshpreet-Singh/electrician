@@ -73,7 +73,7 @@ export default function Home() {
         </div>
         <div className="hidden md:flex gap-6 text-sm" style={{ color: 'var(--body)' }}>
           {['services', 'why-us', 'testimonials', 'faq', 'contact'].map(s => (
-            <button key={s} onClick={() => scrollTo(s)} className="capitalize hover:text-white transition-colors" aria-label={`Navigate to ${s}`}>{s.replace('-', ' ')}</button>
+            <button key={s} onClick={() => scrollTo(s)} className="capitalize hover:text-white transition-colors" aria-label={`Navigate to ${s}`} aria-label={`Navigate to ${s}`}>{s.replace('-', ' ')}</button>
           ))}
         </div>
         <button onClick={() => scrollTo('contact')} aria-label="Navigate to contact" className="btn">Free Estimate</button>
@@ -236,7 +236,7 @@ export default function Home() {
             </div>
             <div className="space-y-3">
               {faqs.map((faq, i) => (
-                <div key={i} className="card cursor-pointer" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
+                <div key={i} className="card cursor-pointer" onClick={() => setOpenFaq(openFaq === i ? null : i)} aria-expanded={openFaq === i}
                   <div className="flex justify-between items-center">
                     <h3 className="font-bold pr-4">{faq.q}</h3>
                     <span className="shrink-0 text-lg transition-transform" style={{ color: 'var(--accent)', transform: openFaq === i ? 'rotate(45deg)' : 'rotate(0)' }}>+</span>
