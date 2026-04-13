@@ -69,14 +69,14 @@ export default function Home() {
       <nav role="navigation" className="sticky top-0 z-50 px-6 md:px-8 py-4 flex justify-between items-center" style={{ background: 'rgba(28,28,28,0.92)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border)' }}>
         <div>
           <h1 className="heading text-xl font-bold" style={{ color: 'var(--accent)' }}>VoltPro Electric</h1>
-          <p className="text-[9px] tracking-[0.2em] uppercase" style={{ color: 'var(--body)' }}>Licensed Master Electrician · Austin, TX</p>
+          <p className="text-base tracking-[0.2em] uppercase" style={{ color: 'var(--body)' }}>Licensed Master Electrician · Austin, TX</p>
         </div>
-        <div className="hidden md:flex gap-6 text-sm" style={{ color: 'var(--body)' }}>
+        <div className="hidden md:flex gap-6 text-base" style={{ color: 'var(--body)' }}>
           {['services', 'why-us', 'testimonials', 'faq', 'contact'].map(s => (
-            <button key={s} onClick={() => scrollTo(s)} className="capitalize hover:text-white transition-colors" aria-label={`Navigate to ${s}`}>{s.replace('-', ' ')}</button>
+            <button className="btn" key={s} onClick={() => scrollTo(s)} className="capitalize hover:text-white transition-colors" aria-label={`Navigate to ${s}`}>{s.replace('-', ' ')}</button>
           ))}
         </div>
-        <button onClick={() => scrollTo('contact')} aria-label="Navigate to contact" className="btn">Free Estimate</button>
+        <button className="btn" onClick={() => scrollTo('contact')} aria-label="Navigate to contact" className="btn">Free Estimate</button>
       </nav>
 
       <main role="main">
@@ -96,8 +96,8 @@ export default function Home() {
                 We believe in upfront pricing, clean workmanship, and doing the job right the first time — every time.
               </p>
               <div className="flex gap-4 flex-wrap">
-                <button onClick={() => scrollTo('contact')} aria-label="Navigate to contact" className="btn">Get Free Estimate</button>
-                <button onClick={() => scrollTo('services')} aria-label="Navigate to services" className="btn-outline">View Services</button>
+                <button className="btn" onClick={() => scrollTo('contact')} aria-label="Navigate to contact" className="btn">Get Free Estimate</button>
+                <button className="btn" onClick={() => scrollTo('services')} aria-label="Navigate to services" className="btn-outline">View Services</button>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-14">
                 {[
@@ -319,16 +319,16 @@ export default function Home() {
               ) : (
                 <form onSubmit={e => { e.preventDefault(); setSubmitted(true); }} className="card space-y-4">
                   <div className="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="Your Name *" aria-label="Your Name *" required className="w-full p-3" style={{ border: '1px solid #444', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)' }} />
-                    <input type="tel" placeholder="Phone Number *" aria-label="Phone Number *" required className="w-full p-3" style={{ border: '1px solid #444', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)' }} />
+                    <input type="text" placeholder="Your Name *" aria-label="Your Name *" required className="w-full p-3 border border-gray-300 " style={{ border: '1px solid #444', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)' }} />
+                    <input type="tel" placeholder="Phone Number *" aria-label="Phone Number *" required className="w-full p-3 border border-gray-300 " style={{ border: '1px solid #444', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)' }} />
                   </div>
-                  <input type="email" placeholder="Email Address" aria-label="Email Address" className="w-full p-3" style={{ border: '1px solid #444', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)' }} />
-                  <input type="text" placeholder="Service Address" aria-label="Service Address" className="w-full p-3" style={{ border: '1px solid #444', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)' }} />
-                  <select aria-label="Select option" defaultValue="" className="w-full p-3" style={{ border: '1px solid #444', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)' }}>
+                  <input type="email" placeholder="Email Address" aria-label="Email Address" className="w-full p-3 border border-gray-300 " style={{ border: '1px solid #444', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)' }} />
+                  <input type="text" placeholder="Service Address" aria-label="Service Address" className="w-full p-3 border border-gray-300 " style={{ border: '1px solid #444', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)' }} />
+                  <select aria-label="Select option" defaultValue="" className="w-full p-3 border border-gray-300 " style={{ border: '1px solid #444', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)' }}>
                     <option value="" disabled>Select a Service</option>
                     {services.map(s => <option key={s.name} value={s.name}>{s.name}</option>)}
                   </select>
-                  <textarea rows={4} placeholder="Describe the work you need done. Include any relevant details like the age of your home, specific problems you are experiencing, or the scope of your project..." aria-label="Describe the work you need done. Include any relevant details like the age of your home, specific problems you are experiencing, or the scope of your project" className="w-full p-3" style={{ border: '1px solid #444', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)' }} />
+                  <textarea rows={4} placeholder="Describe the work you need done. Include any relevant details like the age of your home, specific problems you are experiencing, or the scope of your project..." aria-label="Describe the work you need done. Include any relevant details like the age of your home, specific problems you are experiencing, or the scope of your project" className="w-full p-3 border border-gray-300 " style={{ border: '1px solid #444', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)' }} />
                   <button type="submit" className="btn w-full text-center py-4">REQUEST FREE ESTIMATE</button>
                   <p className="text-xs text-center" style={{ color: 'var(--body)' }}>No obligation. We respond within 2 hours.</p>
                 </form>
