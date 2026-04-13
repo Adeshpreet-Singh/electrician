@@ -73,10 +73,10 @@ export default function Home() {
         </div>
         <div className="hidden md:flex gap-6 text-base" style={{ color: 'var(--body)' }}>
           {['services', 'why-us', 'testimonials', 'faq', 'contact'].map(s => (
-            <button className="btn" key={s} onClick={() => scrollTo(s)} className="capitalize hover:text-white transition-colors" aria-label={`Navigate to ${s}`}>{s.replace('-', ' ')}</button>
+            <button key={s} onClick={() => scrollTo(s)} className="btn capitalize hover:text-white transition-colors" aria-label={`Navigate to ${s}`}>{s.replace('-', ' ')}</button>
           ))}
         </div>
-        <button className="btn" onClick={() => scrollTo('contact')} aria-label="Navigate to contact" className="btn">Free Estimate</button>
+        <button onClick={() => scrollTo('contact')} aria-label="Navigate to contact" className="btn btn">Free Estimate</button>
       </nav>
 
       <main role="main">
@@ -96,8 +96,8 @@ export default function Home() {
                 We believe in upfront pricing, clean workmanship, and doing the job right the first time — every time.
               </p>
               <div className="flex gap-4 flex-wrap">
-                <button className="btn" onClick={() => scrollTo('contact')} aria-label="Navigate to contact" className="btn">Get Free Estimate</button>
-                <button className="btn" onClick={() => scrollTo('services')} aria-label="Navigate to services" className="btn-outline">View Services</button>
+                <button onClick={() => scrollTo('contact')} aria-label="Navigate to contact" className="btn btn">Get Free Estimate</button>
+                <button onClick={() => scrollTo('services')} aria-label="Navigate to services" className="btn btn-outline">View Services</button>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-14">
                 {[
@@ -350,7 +350,7 @@ export default function Home() {
             <span>·</span>
             <span>BBB A+ Rated</span>
           </div>
-          <p className="text-xs" style={{ color: 'var(--body)', opacity: 0.7 }}>
+          <p className="text-xs" style={{ color: 'var(--body)', opacity: '0.88' }}>
             &copy; {new Date().getFullYear()} VoltPro Electric LLC. All rights reserved. Serving the Austin metropolitan area since 2004.
           </p>
         </div>
