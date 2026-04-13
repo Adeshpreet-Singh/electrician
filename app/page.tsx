@@ -59,7 +59,7 @@ export default function Home() {
     <div className="min-h-screen" style={{ background: 'var(--bg)', color: 'var(--heading)' }}>
 
       {/* ========== EMERGENCY BANNER ========== */}
-      <div className="bg-gradient-to-r from-red-700 to-red-600 text-white text-center py-3 px-4 text-sm font-semibold tracking-wide">
+      <div className="bg-gradient-to-r from-red-600 to-red-500 text-white text-center py-4 px-6 text-sm font-semibold tracking-wide">
         ⚡ 24/7 Electrical Emergencies — Call{' '}
         <a href="tel:(512) 555-0145" className="underline font-bold hover:text-yellow-200 transition-colors">(512) 555-0145</a>{' '}
         — Live Answer, Same-Day Dispatch, No After-Hours Upcharge
@@ -141,7 +141,7 @@ export default function Home() {
                   <div className="flex justify-between items-start mb-3">
                     <h3 className="font-bold text-base">{s.name}</h3>
                   </div>
-                  <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--body)' }}>{s.desc}</p>
+                  <p className="text-base leading-relaxed mb-4" style={{ color: 'var(--body)', fontSize: '15px', lineHeight: '1.6' }}>{s.desc}</p>
                   <p className="font-bold text-sm" style={{ color: 'var(--accent)' }}>{s.price}</p>
                 </div>
               ))}
@@ -216,7 +216,7 @@ export default function Home() {
                   <div className="flex gap-1 mb-4" style={{ color: '#facc15' }}>
                     {Array.from({ length: t.rating }).map((_, i) => <span key={i}>★</span>)}
                   </div>
-                  <p className="text-sm leading-relaxed italic mb-6" style={{ color: 'var(--body)' }}>&ldquo;{t.text}&rdquo;</p>
+                  <p className="text-base mb-6" style={{ color: 'var(--body)', fontSize: '16px', lineHeight: '1.6' }}>&ldquo;{t.text}&rdquo;</p>
                   <div className="border-t pt-4" style={{ borderColor: 'var(--border)' }}>
                     <p className="font-bold text-sm">{t.name}</p>
                     <p className="text-xs" style={{ color: 'var(--body)' }}>{t.location}</p>
