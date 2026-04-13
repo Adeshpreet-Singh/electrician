@@ -73,7 +73,7 @@ export default function Home() {
         </div>
         <div className="hidden md:flex gap-6 text-sm" style={{ color: 'var(--body)' }}>
           {['services', 'why-us', 'testimonials', 'faq', 'contact'].map(s => (
-            <button key={s} onClick={() => scrollTo(s)} className="capitalize hover:text-white transition-colors" aria-label={`Navigate to ${s}`} aria-label={`Navigate to ${s}`}>{s.replace('-', ' ')}</button>
+            <button key={s} onClick={() => scrollTo(s)} className="capitalize hover:text-white transition-colors" aria-label={`Navigate to ${s}`}>{s.replace('-', ' ')}</button>
           ))}
         </div>
         <button onClick={() => scrollTo('contact')} aria-label="Navigate to contact" className="btn">Free Estimate</button>
@@ -236,7 +236,7 @@ export default function Home() {
             </div>
             <div className="space-y-3">
               {faqs.map((faq, i) => (
-                <div key={i} className="card cursor-pointer" onClick={() => setOpenFaq(openFaq === i ? null : i)} aria-expanded={openFaq === i}
+                <div key={i} className="card cursor-pointer" onClick={() => setOpenFaq(openFaq === i ? null : i)} aria-expanded={openFaq === i}>
                   <div className="flex justify-between items-center">
                     <h3 className="font-bold pr-4">{faq.q}</h3>
                     <span className="shrink-0 text-lg transition-transform" style={{ color: 'var(--accent)', transform: openFaq === i ? 'rotate(45deg)' : 'rotate(0)' }}>+</span>
@@ -319,16 +319,16 @@ export default function Home() {
               ) : (
                 <form onSubmit={e => { e.preventDefault(); setSubmitted(true); }} className="card space-y-4">
                   <div className="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="Your Name *" aria-label="Your Name *" required />
-                    <input type="tel" placeholder="Phone Number *" aria-label="Phone Number *" required />
+                    <input type="text" placeholder="Your Name *" aria-label="Your Name *" required className="w-full p-3" style={{ border: '1px solid #444', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)' }} />
+                    <input type="tel" placeholder="Phone Number *" aria-label="Phone Number *" required className="w-full p-3" style={{ border: '1px solid #444', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)' }} />
                   </div>
-                  <input type="email" placeholder="Email Address" aria-label="Email Address" />
-                  <input type="text" placeholder="Service Address" aria-label="Service Address" />
-                  <select aria-label="Select option" defaultValue="">
+                  <input type="email" placeholder="Email Address" aria-label="Email Address" className="w-full p-3" style={{ border: '1px solid #444', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)' }} />
+                  <input type="text" placeholder="Service Address" aria-label="Service Address" className="w-full p-3" style={{ border: '1px solid #444', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)' }} />
+                  <select aria-label="Select option" defaultValue="" className="w-full p-3" style={{ border: '1px solid #444', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)' }}>
                     <option value="" disabled>Select a Service</option>
                     {services.map(s => <option key={s.name} value={s.name}>{s.name}</option>)}
                   </select>
-                  <textarea rows={4} placeholder="Describe the work you need done. Include any relevant details like the age of your home, specific problems you are experiencing, or the scope of your project..." aria-label="Describe the work you need done. Include any relevant details like the age of your home, specific problems you are experiencing, or the scope of your project" />
+                  <textarea rows={4} placeholder="Describe the work you need done. Include any relevant details like the age of your home, specific problems you are experiencing, or the scope of your project..." aria-label="Describe the work you need done. Include any relevant details like the age of your home, specific problems you are experiencing, or the scope of your project" className="w-full p-3" style={{ border: '1px solid #444', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)' }} />
                   <button type="submit" className="btn w-full text-center py-4">REQUEST FREE ESTIMATE</button>
                   <p className="text-xs text-center" style={{ color: 'var(--body)' }}>No obligation. We respond within 2 hours.</p>
                 </form>
@@ -350,7 +350,7 @@ export default function Home() {
             <span>·</span>
             <span>BBB A+ Rated</span>
           </div>
-          <p className="text-xs" style={{ color: 'var(--body)', opacity: 0.5 }}>
+          <p className="text-xs" style={{ color: 'var(--body)', opacity: 0.7 }}>
             &copy; {new Date().getFullYear()} VoltPro Electric LLC. All rights reserved. Serving the Austin metropolitan area since 2004.
           </p>
         </div>
