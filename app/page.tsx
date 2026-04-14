@@ -73,10 +73,10 @@ export default function Home() {
         </div>
         <div className="hidden md:flex gap-6 text-base" style={{ color: 'var(--body)' }}>
           {['services', 'why-us', 'testimonials', 'faq', 'contact'].map(s => (
-            <button style={{ cursor: "pointer" }} key={s} onClick={() => scrollTo(s)} className="btn capitalize hover:text-white transition-colors" aria-label={`Navigate to ${s}`}>{s.replace('-', ' ')}</button>
+            <button key={s} onClick={() => scrollTo(s)} className="btn capitalize hover:text-white transition-colors" aria-label={`Navigate to ${s}`}>{s.replace('-', ' ')}</button>
           ))}
         </div>
-        <button style={{ cursor: "pointer" }} onClick={() => scrollTo('contact')} aria-label="Navigate to contact" className="btn btn">Free Estimate</button>
+        <button onClick={() => scrollTo('contact')} aria-label="Navigate to contact" className="btn btn">Free Estimate</button>
       </nav>
 
       <main role="main">
@@ -96,8 +96,8 @@ export default function Home() {
                 We believe in upfront pricing, clean workmanship, and doing the job right the first time — every time.
               </p>
               <div className="flex gap-4 flex-wrap">
-                <button style={{ cursor: "pointer" }} onClick={() => scrollTo('contact')} aria-label="Navigate to contact" className="btn btn">Get Free Estimate</button>
-                <button style={{ cursor: "pointer" }} onClick={() => scrollTo('services')} aria-label="Navigate to services" className="btn btn-outline">View Services</button>
+                <button onClick={() => scrollTo('contact')} aria-label="Navigate to contact" className="btn btn">Get Free Estimate</button>
+                <button onClick={() => scrollTo('services')} aria-label="Navigate to services" className="btn btn-outline">View Services</button>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-14">
                 {[
@@ -329,7 +329,7 @@ export default function Home() {
                     {services.map(s => <option key={s.name} value={s.name}>{s.name}</option>)}
                   </select>
                   <textarea rows={4} placeholder="Describe the work you need done. Include any relevant details like the age of your home, specific problems you are experiencing, or the scope of your project..." aria-label="Describe the work you need done. Include any relevant details like the age of your home, specific problems you are experiencing, or the scope of your project" className="w-full p-3 border border-gray-300 " style={{ border: '1px solid #444', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)' }} />
-                  <button style={{ cursor: "pointer" }} type="submit" className="btn w-full text-center py-4">REQUEST FREE ESTIMATE</button>
+                  <button type="submit" className="btn w-full text-center py-4">REQUEST FREE ESTIMATE</button>
                   <p className="text-xs text-center" style={{ color: 'var(--body)' }}>No obligation. We respond within 2 hours.</p>
                 </form>
               )}
