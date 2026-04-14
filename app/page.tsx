@@ -1,364 +1,386 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-const images = {
-  hero: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80',
-  services: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80',
-  commercial: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80',
-};
-
-const services = [
-  { name: 'Panel Upgrades', desc: 'Upgrade your outdated electrical panel to handle modern power demands safely and efficiently. We specialize in 100A to 400A panel replacements, bringing older homes up to current National Electrical Code requirements. Every upgrade includes a comprehensive safety inspection, permit acquisition, and city inspection sign-off. Whether you are adding an EV charger, hot tub, home addition, or simply need more capacity for modern appliances, a panel upgrade is the foundation of a safe and reliable electrical system. Our team evaluates your current load, calculates future demand, and installs a panel that gives you room to grow.', price: 'From $2,500', icon: '⚡' },
-  { name: 'EV Charger Installation', desc: 'Level 2 home EV charger installation for Tesla, ChargePoint, JuiceBox, Wallbox, and every major brand. We run a dedicated 240V circuit from your panel to your garage or driveway, install the NEMA 14-50 outlet or hardwire your unit, and handle all permitting and inspections. Most installations are completed in a single visit with minimal disruption. We also assess whether your existing panel can support the additional electrical load or whether an upgrade is required before installation. Drive electric with confidence knowing your charger was installed by a licensed master electrician.', price: 'From $800', icon: '🔌' },
-  { name: 'Lighting Design & Installation', desc: 'Transform any room in your home with professional lighting design and installation. We install recessed lighting, pendant fixtures, chandeliers, under-cabinet LED strips, landscape and pathway lighting, smart dimmer switches, and whole-home LED conversion packages. Our experienced team helps you select the right fixtures and optimal placement for ambiance, energy efficiency, and functionality in every room. From a single fixture swap to a complete lighting redesign, we deliver clean installations that look beautiful and perform reliably for years to come.', price: 'From $200', icon: '💡' },
-  { name: 'Wiring & Rewiring', desc: 'Complete wiring and rewiring services for new construction, renovations, and older homes with outdated aluminum or knob-and-tube wiring. We replace dangerous legacy wiring with modern copper conductors, add circuits for new appliances, install dedicated lines for home offices and media rooms, and ensure every connection meets NEC code standards. Full documentation and permits are included with every project. If your home was built before 1980, a wiring inspection can reveal hidden hazards that put your family at risk. Do not wait for a problem to surface.', price: 'From $150', icon: '🔧' },
-  { name: 'Generator Installation', desc: 'Whole-home standby generator installation keeps your family comfortable and safe during power outages. We install automatic transfer switches, connect natural gas or propane fuel lines, and configure your generator to power critical systems or your entire home. Trusted brands include Generac, Kohler, and Briggs & Stratton. We handle permits, utility coordination, and final commissioning so you never have to worry about losing power. Texas storms are unpredictable, but your backup power should not be. Schedule a generator consultation today.', price: 'From $5,000', icon: '🔋' },
-  { name: 'Electrical Inspection', desc: 'Comprehensive electrical safety inspections for home buyers, sellers, insurance requirements, and peace of mind. We evaluate your panel, wiring, outlets, grounding, GFCI and AFCI protection, and overall system health. You receive a detailed written report with photographs, code violation notes, and prioritized repair recommendations. Same-day reports are available for real estate transactions where timing matters. Whether you are buying a new home, selling your current one, or simply want to verify that your electrical system is safe, our inspections give you the information you need to make confident decisions.', price: 'From $195', icon: '📋' },
-  { name: 'Commercial Electrical', desc: 'Full-service commercial electrical contracting for offices, retail spaces, restaurants, and warehouses. Services include tenant build-outs, lighting retrofits, electrical panel installations, dedicated equipment circuits, data cabling coordination, exit and emergency lighting, and ongoing maintenance contracts. We work nights and weekends to minimize disruption to your business operations. Our commercial team understands that downtime costs money, so we plan every project carefully, communicate timelines clearly, and deliver on schedule and on budget.', price: 'Custom Quote', icon: '🏢' },
-  { name: 'Smart Home Wiring', desc: 'Future-proof your home with structured wiring designed for modern smart home systems. We install Cat6 and Cat6a ethernet, coax, speaker wire, smart switch and dimmer wiring, whole-home Wi-Fi access point cabling, home automation hubs, and security camera pre-wire. Whether you are building a new home or retrofitting an existing one, we design a wiring infrastructure that supports today\'s technology and tomorrow\'s innovations. Smart homes start with smart wiring, and our team ensures your network backbone is built to perform.', price: 'From $350', icon: '🏠' },
-];
-
-const testimonials = [
-  { name: 'Sarah M.', location: 'West Lake Hills', text: 'VoltPro upgraded our panel from 100A to 200A and installed a Tesla charger in the same visit. The crew was on time, wore booties inside, and cleaned up everything. Our city inspection passed on the first try. Highly recommend for any major electrical work.', rating: 5 },
-  { name: 'James R.', location: 'Round Rock', text: 'Called at 6 AM about flickering lights and a burning smell from our panel. They had someone at our door by 8 AM. Turned out a breaker had failed and was overheating. Fixed it on the spot and did a full safety check at no extra charge. These are the people you want in an emergency.', rating: 5 },
-  { name: 'Maria L.', location: 'Cedar Park', text: 'We hired VoltPro to rewire our 1970s home during a remodel. They replaced all the aluminum wiring, added recessed lighting throughout, and set up smart switches in every room. The work was meticulous and they coordinated perfectly with our general contractor. Worth every penny.', rating: 5 },
-];
-
-const serviceAreas = [
-  'Austin', 'Round Rock', 'Cedar Park', 'Georgetown', 'Pflugerville',
-  'Leander', 'Kyle', 'Buda', 'Lakeway', 'Bee Cave',
-  'Dripping Springs', 'West Lake Hills', 'Rollingwood', 'Hutto', 'Manor',
-];
-
-export default function Home() {
-  const [submitted, setSubmitted] = useState(false);
-
-  const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+export default function ElectricianPage() {
+  const [bannerVisible, setBannerVisible] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '', service: '', message: '' });
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); },
-      { threshold: 0.08 }
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
     );
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-    return () => obs.disconnect();
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-scale, .stagger-children').forEach((el) => {
+      observerRef.current?.observe(el);
+    });
+    return () => observerRef.current?.disconnect();
   }, []);
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+    setTimeout(() => setFormSubmitted(false), 5000);
+  };
+
   return (
-    <div className="min-h-screen" style={{ background: '#0a0a0a', color: '#ffffff' }}>
+    <>
+      {/* ====== EMERGENCY BANNER ====== */}
+      {bannerVisible && (
+        <div className="emergency-banner">
+          <div className="emergency-pulse" />
+          <span className="emergency-icon">⚡</span>
+          <span>24/7 Emergency Electrical Service</span>
+          <span className="emergency-divider">|</span>
+          <a href="tel:18005551234" className="emergency-phone">Call Now: (800) 555-1234</a>
+          <button onClick={() => setBannerVisible(false)} style={{ position: 'absolute', right: '1rem', background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', fontSize: '1.2rem' }}>×</button>
+        </div>
+      )}
 
-      {/* ========== EMERGENCY BANNER ========== */}
-      <div className="emergency-banner">
-        <div className="emergency-pulse"></div>
-        <span className="emergency-icon">⚡</span>
-        <span>24/7 ELECTRICAL EMERGENCIES</span>
-        <span className="emergency-divider">|</span>
-        <a href="tel:(512) 555-0145" className="emergency-phone">(512) 555-0145</a>
-        <span className="emergency-divider">|</span>
-        <span>Live Answer · Same-Day Dispatch · No After-Hours Upcharge</span>
-      </div>
-
-      {/* ========== NAVIGATION ========== */}
-      <nav role="navigation" className="nav-bar">
+      {/* ====== NAVIGATION ====== */}
+      <nav className="nav-bar" style={{ top: bannerVisible ? '2.5rem' : '0' }}>
         <div>
-          <h1 className="nav-brand">VoltPro Electric</h1>
-          <p className="nav-tagline">Licensed Master Electrician · Austin, TX</p>
+          <div className="nav-brand">VOLTPRO ELECTRIC</div>
+          <div className="nav-tagline">Licensed & Insured Since 2003</div>
         </div>
         <div className="nav-links">
-          {['services', 'why-us', 'testimonials', 'contact'].map(s => (
-            <button key={s} onClick={() => scrollTo(s)} className="nav-link" aria-label={`Navigate to ${s}`}>
-              {s.replace('-', ' ')}
+          {['Services', 'Why Us', 'Gallery', 'Reviews', 'Contact'].map((item) => (
+            <button key={item} className="nav-link" onClick={() => document.getElementById(item.toLowerCase().replace(' ', '-'))?.scrollIntoView({ behavior: 'smooth' })}>
+              {item}
             </button>
           ))}
+          <button className="btn btn-primary" style={{ padding: '0.6rem 1.5rem', fontSize: '0.75rem' }}>Get Free Quote</button>
         </div>
-        <button onClick={() => scrollTo('contact')} className="btn btn-primary">Free Estimate</button>
       </nav>
 
-      <main role="main">
-        {/* ========== HERO SECTION ========== */}
-        <section className="hero-section">
-          <div className="hero-inner">
-            <div className="hero-content">
-              <span className="badge">Licensed & Insured · Since 2004</span>
-              <h2 className="hero-title">
-                Power Your Life<br />
-                <span className="text-accent">Done Right.</span>
-              </h2>
-              <p className="hero-desc">
-                VoltPro Electric delivers residential and commercial electrical services you can trust.
-                From panel upgrades and EV charger installations to full rewiring and smart home systems,
-                our licensed master electricians bring over two decades of experience to every project.
-                We believe in upfront pricing, clean workmanship, and doing the job right the first time — every time.
-                When you choose VoltPro, you get a team that treats your home with respect, arrives on schedule,
-                and stands behind every installation with a lifetime workmanship warranty.
-              </p>
-              <div className="hero-actions">
-                <button onClick={() => scrollTo('contact')} className="btn btn-primary">Get Free Estimate</button>
-                <button onClick={() => scrollTo('services')} className="btn btn-outline">View Services</button>
+      {/* ====== HERO SECTION ====== */}
+      <section className="hero-section" style={{ paddingTop: bannerVisible ? '10rem' : '7rem' }}>
+        <div className="hero-inner">
+          <div className="hero-content">
+            <span className="badge">Award-Winning Electricians</span>
+            <h1 className="hero-title">Power Your Home With <span className="text-accent">Confidence</span></h1>
+            <p className="hero-desc">
+              From emergency repairs to complete rewiring, VoltPro Electric delivers safe, reliable, and code-compliant electrical solutions for residential and commercial properties across the tri-state area. Our certified master electricians bring over 20 years of expertise to every project, ensuring your home or business stays powered safely and efficiently. We use only premium-grade materials and the latest diagnostic technology to identify issues before they become hazards.
+            </p>
+            <p className="hero-desc" style={{ marginTop: '-1rem' }}>
+              Whether you need a simple outlet installation, a full panel upgrade, or complex commercial wiring, our team arrives on time, works cleanly, and guarantees every job with our industry-leading 5-year warranty. We understand that electrical issues can be stressful and even dangerous, which is why we offer 24/7 emergency services with response times under 60 minutes. Trust VoltPro to keep your lights on and your family safe.
+            </p>
+            <div className="hero-actions">
+              <button className="btn btn-primary">Schedule Service</button>
+              <button className="btn btn-outline">Emergency Repair</button>
+            </div>
+            <div className="hero-stats">
+              <div>
+                <div className="stat-number">20+</div>
+                <div className="stat-label">Years Experience</div>
               </div>
-              <div className="hero-stats">
-                {[
-                  { n: '20+', l: 'Years Experience' },
-                  { n: '5,000+', l: 'Jobs Completed' },
-                  { n: '4.9★', l: 'Google Rating' },
-                  { n: 'Same Day', l: 'Service Available' },
-                ].map(s => (
-                  <div key={s.l} className="stat-item">
-                    <p className="stat-number">{s.n}</p>
-                    <p className="stat-label">{s.l}</p>
+              <div>
+                <div className="stat-number">15K+</div>
+                <div className="stat-label">Jobs Completed</div>
+              </div>
+              <div>
+                <div className="stat-number">4.9★</div>
+                <div className="stat-label">Google Rating</div>
+              </div>
+              <div>
+                <div className="stat-number">&lt;60m</div>
+                <div className="stat-label">Emergency Response</div>
+              </div>
+            </div>
+          </div>
+          <div className="hero-image-wrap">
+            <img className="hero-image" src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&h=600&fit=crop" alt="Professional electrician working on panel" />
+            <div className="hero-image-overlay" />
+          </div>
+        </div>
+      </section>
+
+      {/* ====== TRUST BADGES ====== */}
+      <section style={{ padding: '3rem 1.5rem', borderBottom: '1px solid var(--dark-border)' }}>
+        <div className="container" style={{ display: 'flex', justifyContent: 'center', gap: '3rem', flexWrap: 'wrap', alignItems: 'center', opacity: 0.5 }}>
+          {['BBB A+ Rated', 'EPA Certified', 'OSHA Compliant', 'State Licensed', 'Bonded & Insured'].map((badge) => (
+            <span key={badge} style={{ fontFamily: 'var(--font-heading)', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--gray-300)' }}>{badge}</span>
+          ))}
+        </div>
+      </section>
+
+      {/* ====== SERVICES SECTION ====== */}
+      <section id="services" className="section services-section">
+        <div className="container">
+          <div className="section-header reveal">
+            <span className="badge">Our Services</span>
+            <h2 className="section-title">Complete Electrical Solutions</h2>
+            <p className="section-subtitle">From minor repairs to major installations, our licensed electricians handle every job with precision, safety, and a commitment to excellence that has made us the regions most trusted electrical contractor.</p>
+          </div>
+          <div className="services-grid stagger-children">
+            {[
+              { icon: '🔌', name: 'Panel Upgrades', desc: 'Upgrade your outdated electrical panel to handle modern power demands safely. We install 100-400 amp panels with whole-home surge protection.', price: 'From $1,200', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=300&fit=crop' },
+              { icon: '💡', name: 'Lighting Design', desc: 'Transform your space with custom lighting solutions including recessed, pendant, landscape, and smart LED installations that save energy.', price: 'From $150', img: 'https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=400&h=300&fit=crop' },
+              { icon: '🏠', name: 'Whole Home Rewiring', desc: 'Replace outdated knob-and-tube or aluminum wiring with modern copper wiring that meets current safety codes and increases home value.', price: 'From $4,500', img: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=300&fit=crop' },
+              { icon: '⚡', name: 'EV Charger Install', desc: 'Level 2 home EV charger installation with dedicated 240V circuit. Compatible with Tesla, ChargePoint, and all major EV brands.', price: 'From $800', img: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=400&h=300&fit=crop' },
+              { icon: '🔧', name: 'Outlet & Switch', desc: 'Install, replace, or upgrade outlets and switches including GFCI protection, USB outlets, dimmers, and smart home compatible devices.', price: 'From $85', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=300&fit=crop' },
+              { icon: '🔥', name: 'Safety Inspections', desc: 'Comprehensive electrical safety audits using thermal imaging and advanced diagnostics to identify fire hazards and code violations.', price: 'From $199', img: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=400&h=300&fit=crop' },
+              { icon: '☀️', name: 'Solar Integration', desc: 'Connect your solar panel system to your homes electrical grid with proper inverters, disconnects, and net metering setup.', price: 'From $2,000', img: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=300&fit=crop' },
+              { icon: '🏢', name: 'Commercial Electrical', desc: 'Full-service commercial electrical for offices, retail, restaurants, and warehouses including tenant buildouts and maintenance contracts.', price: 'Custom Quote', img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop' },
+            ].map((service) => (
+              <div key={service.name} className="service-card" style={{ padding: 0 }}>
+                <div style={{ height: '140px', overflow: 'hidden', position: 'relative' }}>
+                  <img src={service.img} alt={service.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 40%, rgba(10,10,10,0.9) 100%)' }} />
+                  <span style={{ position: 'absolute', top: '10px', right: '10px', fontSize: '1.5rem', background: 'rgba(10,10,10,0.7)', padding: '4px 8px', borderRadius: '4px' }}>{service.icon}</span>
+                </div>
+                <div style={{ padding: '1.25rem 1.5rem 1.5rem' }}>
+                  <h3 className="service-name">{service.name}</h3>
+                  <p className="service-desc">{service.desc}</p>
+                  <div className="service-price">{service.price}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ====== WHY CHOOSE US ====== */}
+      <section id="why-us" className="section">
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
+            <div className="reveal-left">
+              <span className="badge">Why VoltPro</span>
+              <h2 className="section-title" style={{ textAlign: 'left', marginTop: '1rem' }}>The Electrician Your Neighbors Trust</h2>
+              <p style={{ color: 'var(--gray-300)', lineHeight: 1.7, marginBottom: '2rem' }}>
+                When it comes to your homes electrical system, cutting corners is never an option. At VoltPro Electric, we combine old-school craftsmanship with cutting-edge technology to deliver electrical solutions that are safe, efficient, and built to last. Every member of our team is a licensed journeyman or master electrician who has passed rigorous background checks and drug testing.
+              </p>
+              <p style={{ color: 'var(--gray-300)', lineHeight: 1.7, marginBottom: '2rem' }}>
+                We arrive in fully stocked trucks, wear clean uniforms, use shoe covers and drop cloths, and treat your home with the respect it deserves. Our transparent pricing means no surprises, and our 5-year warranty on all workmanship gives you peace of mind long after the job is done. From the initial consultation to the final walkthrough, we keep you informed and involved every step of the way.
+              </p>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                {['Licensed & Insured', '5-Year Warranty', 'Upfront Pricing', 'Background Checked', 'Same-Day Service', 'Clean & Courteous', 'Code Compliant', 'Free Estimates'].map((item) => (
+                  <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--gray-300)' }}>
+                    <span style={{ color: 'var(--accent)' }}>✓</span> {item}
                   </div>
                 ))}
               </div>
             </div>
-            <div className="hero-image-wrap">
-              <img
-                src={images.hero}
-                alt="Licensed electrician performing professional panel upgrade work"
-                className="hero-image"
-                loading="eager"
-              />
-              <div className="hero-image-overlay"></div>
+            <div className="reveal-scale" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=300&fit=crop" alt="Electrician at work" style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '6px' }} />
+              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=300&fit=crop" alt="Electrical panel" style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '6px' }} />
+              <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=400&h=300&fit=crop" alt="Wiring installation" style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '6px' }} />
+              <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=300&fit=crop" alt="Home electrical work" style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '6px' }} />
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* ========== SERVICES SECTION ========== */}
-        <section id="services" aria-labelledby="services-heading" className="section services-section reveal">
-          <div className="container">
-            <div className="section-header">
-              <span className="badge">What We Do</span>
-              <h2 id="services-heading" className="section-title">Our Electrical Services</h2>
-              <p className="section-subtitle">
-                From simple repairs to complex installations, VoltPro Electric covers every aspect of residential
-                and commercial electrical work. All services include permits, inspections, and our lifetime workmanship warranty.
-                Every project is handled by our in-house team of licensed professionals — never subcontracted, never rushed.
-              </p>
-            </div>
-            <div className="services-grid">
-              {services.map(s => (
-                <div key={s.name} className="service-card">
-                  <div className="service-icon">{s.icon}</div>
-                  <h3 className="service-name">{s.name}</h3>
-                  <p className="service-desc">{s.desc}</p>
-                  <p className="service-price">{s.price}</p>
-                </div>
-              ))}
-            </div>
+      {/* ====== GALLERY ====== */}
+      <section id="gallery" className="section section-alt">
+        <div className="container">
+          <div className="section-header reveal">
+            <span className="badge">Project Gallery</span>
+            <h2 className="section-title">Recent Electrical Projects</h2>
+            <p className="section-subtitle">Browse our portfolio of completed residential and commercial electrical installations, upgrades, and custom lighting projects throughout the region.</p>
           </div>
-        </section>
-
-        {/* ========== FEATURED IMAGE BREAK ========== */}
-        <section className="image-break reveal">
-          <img
-            src={images.services}
-            alt="Professional electrician working on commercial lighting installation"
-            className="image-break-img"
-            loading="lazy"
-          />
-          <div className="image-break-overlay">
-            <h3 className="image-break-title">Professional. Reliable. Trusted.</h3>
-            <p className="image-break-text">
-              Every VoltPro electrician is background-checked, drug-tested, and trained to deliver
-              the highest standard of workmanship on every job.
-            </p>
-          </div>
-        </section>
-
-        {/* ========== WHY CHOOSE US ========== */}
-        <section id="why-us" aria-labelledby="why-us-heading" className="section reveal">
-          <div className="container">
-            <div className="section-header">
-              <span className="badge">The VoltPro Difference</span>
-              <h2 id="why-us-heading" className="section-title">Why Choose VoltPro Electric</h2>
-              <p className="section-subtitle">
-                Not all electricians are created equal. When you hire VoltPro, you are choosing a company that holds
-                itself to the highest standards in the industry. Here is what sets us apart from the competition
-                and why thousands of Austin homeowners trust us with their most important electrical projects.
-              </p>
-            </div>
-            <div className="why-grid">
-              {[
-                { title: 'Licensed Master Electrician', desc: 'Our lead electrician holds a Texas Master Electrician license, the highest credential in the trade. This means rigorous testing, continuing education, and proven expertise across all types of electrical systems. We do not subcontract — every job is handled by our in-house team of licensed professionals who take pride in their craft.' },
-                { title: 'Fully Insured & Bonded', desc: 'We carry $2 million in general liability insurance and full workers\' compensation coverage on every crew member. Your home and our team are protected at all times. We provide certificates of insurance before work begins, giving you complete peace of mind from start to finish.' },
-                { title: 'Code Compliant, Always', desc: 'Every installation meets or exceeds the National Electrical Code and local Austin amendments. We pull permits, schedule inspections, and guarantee your project passes on the first visit from the city inspector. Cutting corners on code is never an option at VoltPro — your safety depends on compliance.' },
-                { title: 'Clean & Respectful Work', desc: 'We treat your home like our own. Drop cloths go down before any work begins. Booties are worn inside at all times. Work areas are vacuumed and wiped down at the end of each day. We communicate our schedule clearly and respect your time, your family, and your property.' },
-              ].map(item => (
-                <div key={item.title} className="why-card">
-                  <div className="why-check">✓</div>
-                  <h3 className="why-title">{item.title}</h3>
-                  <p className="why-desc">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ========== SECOND IMAGE BREAK ========== */}
-        <section className="image-break reveal">
-          <img
-            src={images.commercial}
-            alt="Modern commercial office building with professional electrical infrastructure"
-            className="image-break-img"
-            loading="lazy"
-          />
-          <div className="image-break-overlay">
-            <h3 className="image-break-title">Residential & Commercial Expertise</h3>
-            <p className="image-break-text">
-              From single-family homes to large commercial buildings, VoltPro has the experience and
-              equipment to handle projects of any size and complexity.
-            </p>
-          </div>
-        </section>
-
-        {/* ========== SERVICE AREAS ========== */}
-        <section className="section services-areas-section reveal">
-          <div className="container container-narrow">
-            <div className="section-header">
-              <span className="badge">Coverage</span>
-              <h2 className="section-title">Service Areas</h2>
-              <p className="section-subtitle">
-                VoltPro Electric proudly serves the greater Austin metropolitan area. If your city is not listed
-                below, call us — we likely cover your area too. Our fleet of fully stocked service vehicles is
-                positioned across the metro to ensure fast response times no matter where you are located.
-              </p>
-            </div>
-            <div className="areas-grid">
-              {serviceAreas.map(area => (
-                <span key={area} className="area-tag">{area}</span>
-              ))}
-            </div>
-            <p className="areas-counties">
-              Serving Travis, Williamson, Hays, Bastrop, and Caldwell counties.
-            </p>
-          </div>
-        </section>
-
-        {/* ========== TESTIMONIALS ========== */}
-        <section id="testimonials" aria-labelledby="testimonials-heading" className="section section-alt reveal">
-          <div className="container">
-            <div className="section-header">
-              <span className="badge">Reviews</span>
-              <h2 id="testimonials-heading" className="section-title">What Our Customers Say</h2>
-              <p className="section-subtitle">
-                Do not just take our word for it. Here is what Austin homeowners have to say about working
-                with VoltPro Electric. Our reputation is built on consistently exceeding expectations,
-                and our customers are our best advocates.
-              </p>
-            </div>
-            <div className="testimonials-grid">
-              {testimonials.map(t => (
-                <div key={t.name} className="testimonial-card">
-                  <div className="testimonial-stars">
-                    {Array.from({ length: t.rating }).map((_, i) => <span key={i}>★</span>)}
-                  </div>
-                  <p className="testimonial-text">&ldquo;{t.text}&rdquo;</p>
-                  <div className="testimonial-author">
-                    <p className="testimonial-name">{t.name}</p>
-                    <p className="testimonial-location">{t.location}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ========== CONTACT / ESTIMATE FORM ========== */}
-        <section id="contact" aria-labelledby="contact-heading" className="section contact-section reveal">
-          <div className="container">
-            <div className="contact-grid">
-              <div className="contact-info">
-                <span className="badge">Get In Touch</span>
-                <h2 id="contact-heading" className="section-title">Request a Free Estimate</h2>
-                <p className="contact-desc">
-                  Tell us about your project and we will get back to you within 2 hours with an upfront,
-                  transparent estimate. No obligation, no hidden fees, no pressure. For emergencies,
-                  call us directly at the number below for immediate assistance from a licensed electrician.
-                </p>
-                <div className="contact-details">
-                  <div className="contact-item">
-                    <div className="contact-icon">📞</div>
-                    <div>
-                      <p className="contact-label">Phone</p>
-                      <a href="tel:(512) 555-0145" className="contact-value">(512) 555-0145</a>
-                    </div>
-                  </div>
-                  <div className="contact-item">
-                    <div className="contact-icon">📧</div>
-                    <div>
-                      <p className="contact-label">Email</p>
-                      <a href="mailto:info@voltproelectric.com" className="contact-value">info@voltproelectric.com</a>
-                    </div>
-                  </div>
-                  <div className="contact-item">
-                    <div className="contact-icon">🕐</div>
-                    <div>
-                      <p className="contact-label">Hours</p>
-                      <p className="contact-value-muted">Mon–Sat 7AM–7PM · 24/7 Emergency</p>
-                    </div>
-                  </div>
-                  <div className="contact-item">
-                    <div className="contact-icon">📍</div>
-                    <div>
-                      <p className="contact-label">Location</p>
-                      <p className="contact-value-muted">Serving Austin Metro & Surrounding Areas</p>
-                    </div>
-                  </div>
+          <div className="stagger-children" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
+            {[
+              { img: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=500&h=400&fit=crop', label: '200A Panel Upgrade' },
+              { img: 'https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=500&h=400&fit=crop', label: 'Recessed Lighting' },
+              { img: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=500&h=400&fit=crop', label: 'EV Charger Station' },
+              { img: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=500&h=400&fit=crop', label: 'Commercial Wiring' },
+              { img: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=500&h=400&fit=crop', label: 'Solar Integration' },
+              { img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=500&h=400&fit=crop', label: 'Office Buildout' },
+            ].map((item) => (
+              <div key={item.label} style={{ position: 'relative', overflow: 'hidden', borderRadius: '6px', aspectRatio: '4/3', cursor: 'pointer' }}>
+                <img src={item.img} alt={item.label} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 50%, rgba(10,10,10,0.85) 100%)', display: 'flex', alignItems: 'flex-end', padding: '1rem' }}>
+                  <span style={{ fontFamily: 'var(--font-heading)', fontSize: '0.9rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{item.label}</span>
                 </div>
               </div>
-              <div>
-                {submitted ? (
-                  <div className="form-success">
-                    <div className="form-success-icon">✅</div>
-                    <h3 className="form-success-title">Estimate Request Received!</h3>
-                    <p className="form-success-text">
-                      We will call you within 2 hours. For emergencies, call{' '}
-                      <a href="tel:(512) 555-0145" className="text-accent">(512) 555-0145</a> now.
-                    </p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ====== PROCESS SECTION ====== */}
+      <section className="section">
+        <div className="container">
+          <div className="section-header reveal">
+            <span className="badge">Our Process</span>
+            <h2 className="section-title">How It Works</h2>
+            <p className="section-subtitle">Getting professional electrical service has never been easier. Our streamlined 4-step process ensures a hassle-free experience from start to finish.</p>
+          </div>
+          <div className="stagger-children" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '2rem' }}>
+            {[
+              { step: '01', title: 'Call or Book', desc: 'Contact us by phone or fill out our online form. We will schedule a convenient time for your free on-site consultation and estimate.' },
+              { step: '02', title: 'Free Assessment', desc: 'Our licensed electrician arrives on time, inspects your electrical system, explains findings clearly, and provides an upfront written quote.' },
+              { step: '03', title: 'Expert Service', desc: 'Once approved, we complete the work efficiently using premium materials, keeping your home clean and minimizing disruption to your day.' },
+              { step: '04', title: 'Final Walkthrough', desc: 'We inspect every detail together, answer your questions, provide maintenance tips, and back everything with our 5-year workmanship warranty.' },
+            ].map((item) => (
+              <div key={item.step} style={{ textAlign: 'center' }}>
+                <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(255,215,0,0.08)', border: '2px solid var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem', fontFamily: 'var(--font-heading)', fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent)' }}>{item.step}</div>
+                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.1rem', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.75rem' }}>{item.title}</h3>
+                <p style={{ fontSize: '0.85rem', color: 'var(--gray-300)', lineHeight: 1.65 }}>{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ====== TESTIMONIALS ====== */}
+      <section id="reviews" className="section section-alt">
+        <div className="container">
+          <div className="section-header reveal">
+            <span className="badge">Testimonials</span>
+            <h2 className="section-title">What Our Customers Say</h2>
+            <p className="section-subtitle">With over 500 five-star reviews, our customers consistently praise our professionalism, punctuality, quality workmanship, and fair pricing.</p>
+          </div>
+          <div className="stagger-children" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
+            {[
+              { name: 'Sarah M.', location: 'Westfield, NJ', text: 'VoltPro upgraded our entire panel and installed recessed lighting throughout our home. The electricians were incredibly professional, cleaned up perfectly, and the results exceeded our expectations. Our home has never looked better!' },
+              { name: 'James T.', location: 'Princeton, NJ', text: 'Had an emergency at 11pm when our breaker kept tripping. VoltPro had someone at our door in 45 minutes. They diagnosed a dangerous loose connection, fixed it on the spot, and potentially saved our home from a fire. Cannot recommend them enough.' },
+              { name: 'Linda K.', location: 'Summit, NJ', text: 'We hired VoltPro for our restaurant renovation and they were amazing. They handled all the commercial wiring, kitchen hood connections, and even helped us pass our health inspection by ensuring all GFCI outlets were properly installed. True professionals.' },
+            ].map((review) => (
+              <div key={review.name} className="service-card" style={{ padding: '2rem' }}>
+                <div style={{ color: '#facc15', fontSize: '1.1rem', letterSpacing: '2px', marginBottom: '1rem' }}>★★★★★</div>
+                <p style={{ fontSize: '0.9rem', color: 'var(--gray-300)', lineHeight: 1.7, marginBottom: '1.5rem', fontStyle: 'italic' }}>{review.text}</p>
+                <div>
+                  <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>{review.name}</div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--gray-500)' }}>{review.location}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ====== SERVICE AREAS ====== */}
+      <section className="section">
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
+            <div className="reveal-left">
+              <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&h=450&fit=crop" alt="Service area map" style={{ width: '100%', height: '400px', objectFit: 'cover', borderRadius: '6px' }} />
+            </div>
+            <div className="reveal">
+              <span className="badge">Service Area</span>
+              <h2 className="section-title" style={{ textAlign: 'left', marginTop: '1rem' }}>Proudly Serving the Tri-State Area</h2>
+              <p style={{ color: 'var(--gray-300)', lineHeight: 1.7, marginBottom: '2rem' }}>
+                VoltPro Electric provides comprehensive residential and commercial electrical services across New Jersey, New York, and Connecticut. Our fleet of fully equipped service vehicles ensures rapid response times and efficient service delivery to homes and businesses within a 50-mile radius of our central hub.
+              </p>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+                {['Westfield, NJ', 'Princeton, NJ', 'Summit, NJ', 'Morristown, NJ', 'Edison, NJ', 'New Brunswick, NJ', 'White Plains, NY', 'Stamford, CT'].map((area) => (
+                  <div key={area} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--gray-300)' }}>
+                    <span style={{ color: 'var(--accent)' }}>📍</span> {area}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ====== CONTACT / BOOKING ====== */}
+      <section id="contact" className="section section-alt">
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem' }}>
+            <div className="reveal-left">
+              <span className="badge">Get In Touch</span>
+              <h2 className="section-title" style={{ textAlign: 'left', marginTop: '1rem' }}>Book Your Free Estimate</h2>
+              <p style={{ color: 'var(--gray-300)', lineHeight: 1.7, marginBottom: '2rem' }}>
+                Ready to get started? Fill out the form and one of our certified electricians will contact you within 2 hours during business hours. For emergencies, call us directly at (800) 555-1234. We offer free estimates on all projects over $500 and our pricing is always transparent with no hidden fees.
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                {[
+                  { icon: '📞', label: 'Phone', value: '(800) 555-1234' },
+                  { icon: '✉️', label: 'Email', value: 'info@voltproelectric.com' },
+                  { icon: '🕐', label: 'Hours', value: 'Mon-Fri 7am-7pm, Sat 8am-4pm' },
+                  { icon: '🚨', label: 'Emergency', value: '24/7 Available' },
+                ].map((item) => (
+                  <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <span style={{ fontSize: '1.5rem' }}>{item.icon}</span>
+                    <div>
+                      <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--gray-500)', fontFamily: 'var(--font-heading)' }}>{item.label}</div>
+                      <div style={{ fontSize: '0.95rem', fontWeight: 500 }}>{item.value}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&h=300&fit=crop" alt="VoltPro team" style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '6px', marginTop: '2rem' }} />
+            </div>
+            <div className="reveal-scale">
+              <div className="service-card" style={{ padding: '2rem' }}>
+                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', fontWeight: 700, textTransform: 'uppercase', marginBottom: '1.5rem' }}>Request Service</h3>
+                {formSubmitted ? (
+                  <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
+                    <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✅</div>
+                    <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', marginBottom: '0.5rem' }}>Thank You!</h4>
+                    <p style={{ color: 'var(--gray-300)', fontSize: '0.9rem' }}>We will contact you within 2 hours to confirm your appointment.</p>
                   </div>
                 ) : (
-                  <form onSubmit={e => { e.preventDefault(); setSubmitted(true); }} className="estimate-form">
-                    <div className="form-row">
-                      <input type="text" placeholder="Your Name *" aria-label="Your Name" required />
-                      <input type="tel" placeholder="Phone Number *" aria-label="Phone Number" required />
-                    </div>
-                    <input type="email" placeholder="Email Address" aria-label="Email Address" />
-                    <input type="text" placeholder="Service Address" aria-label="Service Address" />
-                    <select aria-label="Select service" defaultValue="">
-                      <option value="" disabled>Select a Service</option>
-                      {services.map(s => <option key={s.name} value={s.name}>{s.name}</option>)}
+                  <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    <input type="text" placeholder="Full Name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} style={{ background: 'var(--dark)', border: '1px solid var(--dark-border)', borderRadius: '4px', padding: '0.75rem 1rem', color: 'var(--white)', fontSize: '0.9rem' }} required />
+                    <input type="tel" placeholder="Phone Number" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} style={{ background: 'var(--dark)', border: '1px solid var(--dark-border)', borderRadius: '4px', padding: '0.75rem 1rem', color: 'var(--white)', fontSize: '0.9rem' }} required />
+                    <input type="email" placeholder="Email Address" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} style={{ background: 'var(--dark)', border: '1px solid var(--dark-border)', borderRadius: '4px', padding: '0.75rem 1rem', color: 'var(--white)', fontSize: '0.9rem' }} />
+                    <select value={formData.service} onChange={(e) => setFormData({ ...formData, service: e.target.value })} style={{ background: 'var(--dark)', border: '1px solid var(--dark-border)', borderRadius: '4px', padding: '0.75rem 1rem', color: 'var(--white)', fontSize: '0.9rem' }}>
+                      <option value="">Select Service</option>
+                      <option>Panel Upgrade</option>
+                      <option>Lighting Installation</option>
+                      <option>Rewiring</option>
+                      <option>EV Charger</option>
+                      <option>Electrical Inspection</option>
+                      <option>Emergency Repair</option>
+                      <option>Other</option>
                     </select>
-                    <textarea
-                      rows={4}
-                      placeholder="Describe the work you need done. Include any relevant details like the age of your home, specific problems you are experiencing, or the scope of your project..."
-                      aria-label="Project description"
-                    />
-                    <button type="submit" className="btn btn-primary btn-full">REQUEST FREE ESTIMATE</button>
-                    <p className="form-note">No obligation. We respond within 2 hours.</p>
+                    <textarea placeholder="Describe your project..." rows={4} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} style={{ background: 'var(--dark)', border: '1px solid var(--dark-border)', borderRadius: '4px', padding: '0.75rem 1rem', color: 'var(--white)', fontSize: '0.9rem', resize: 'vertical' }} />
+                    <button type="submit" className="btn btn-primary btn-full">Submit Request</button>
                   </form>
                 )}
               </div>
             </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
 
-      {/* ========== FOOTER ========== */}
-      <footer className="footer">
-        <div className="container container-narrow">
-          <h3 className="footer-brand">VoltPro Electric</h3>
-          <p className="footer-tagline">Licensed Master Electrician · Bonded & Insured · Austin, TX</p>
-          <div className="footer-badges">
-            <span>LIC #TECL-28475</span>
-            <span>·</span>
-            <span>$2M General Liability</span>
-            <span>·</span>
-            <span>BBB A+ Rated</span>
+      {/* ====== FOOTER ====== */}
+      <footer style={{ background: 'var(--dark-surface)', borderTop: '1px solid var(--dark-border)', padding: '4rem 1.5rem 2rem' }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '3rem', marginBottom: '3rem' }}>
+            <div>
+              <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '1rem' }}>VoltPro Electric</div>
+              <p style={{ fontSize: '0.85rem', color: 'var(--gray-300)', lineHeight: 1.7, marginBottom: '1rem' }}>Professional residential and commercial electrical services. Licensed, insured, and committed to safety and excellence since 2003.</p>
+              <p style={{ fontSize: '0.85rem', color: 'var(--gray-500)' }}>License #EL-2847193</p>
+            </div>
+            <div>
+              <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem', color: 'var(--accent)' }}>Services</h4>
+              {['Panel Upgrades', 'Lighting', 'Rewiring', 'EV Chargers', 'Safety Inspections', 'Commercial'].map((s) => (
+                <div key={s} style={{ fontSize: '0.8rem', color: 'var(--gray-300)', marginBottom: '0.5rem', cursor: 'pointer' }}>{s}</div>
+              ))}
+            </div>
+            <div>
+              <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem', color: 'var(--accent)' }}>Company</h4>
+              {['About Us', 'Careers', 'Blog', 'Financing', 'Warranty', 'Contact'].map((s) => (
+                <div key={s} style={{ fontSize: '0.8rem', color: 'var(--gray-300)', marginBottom: '0.5rem', cursor: 'pointer' }}>{s}</div>
+              ))}
+            </div>
+            <div>
+              <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem', color: 'var(--accent)' }}>Contact</h4>
+              <div style={{ fontSize: '0.8rem', color: 'var(--gray-300)', lineHeight: 2 }}>
+                <div>(800) 555-1234</div>
+                <div>info@voltproelectric.com</div>
+                <div>123 Industrial Blvd<br />Westfield, NJ 07090</div>
+              </div>
+            </div>
           </div>
-          <p className="footer-copy">
-            &copy; {new Date().getFullYear()} VoltPro Electric LLC. All rights reserved. Serving the Austin metropolitan area since 2004.
-          </p>
+          <div style={{ borderTop: '1px solid var(--dark-border)', paddingTop: '1.5rem', textAlign: 'center', fontSize: '0.75rem', color: 'var(--gray-500)' }}>
+            © 2026 VoltPro Electric. All rights reserved. | Privacy Policy | Terms of Service
+          </div>
         </div>
       </footer>
-    </div>
+    </>
   );
 }
