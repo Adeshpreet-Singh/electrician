@@ -105,7 +105,7 @@ export default function ElectricianPage() {
 
       {/* ====== TRUST BADGES ====== */}
       <section style={{ padding: '3rem 1.5rem', borderBottom: '1px solid var(--dark-border)' }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'center', gap: '3rem', flexWrap: 'wrap', alignItems: 'center', opacity: 0.5 }}>
+        <div className="container" style={{ display: 'flex', justifyContent: 'center', gap: '3rem', flexWrap: 'wrap', alignItems: 'center', opacity: '0.9' }}>
           {['BBB A+ Rated', 'EPA Certified', 'OSHA Compliant', 'State Licensed', 'Bonded & Insured'].map((badge) => (
             <span key={badge} style={{ fontFamily: 'var(--font-heading)', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--gray-300)' }}>{badge}</span>
           ))}
@@ -251,7 +251,7 @@ export default function ElectricianPage() {
                 <p style={{ fontSize: '0.9rem', color: 'var(--gray-300)', lineHeight: 1.7, marginBottom: '1.5rem', fontStyle: 'italic' }}>{review.text}</p>
                 <div>
                   <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>{review.name}</div>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--gray-500)' }}>{review.location}</div>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--gray-300)' }}>{review.location}</div>
                 </div>
               </div>
             ))}
