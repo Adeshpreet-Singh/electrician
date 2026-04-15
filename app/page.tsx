@@ -105,7 +105,7 @@ export default function ElectricianPage() {
 
       {/* ====== TRUST BADGES ====== */}
       <section style={{ padding: '3rem 1.5rem', borderBottom: '1px solid var(--dark-border)' }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'center', gap: '3rem', flexWrap: 'wrap', alignItems: 'center', opacity: '0.9' }}>
+        <div className="container" style={{ display: 'flex', justifyContent: 'center', gap: '3rem', flexWrap: 'wrap', alignItems: 'center' }}>
           {['BBB A+ Rated', 'EPA Certified', 'OSHA Compliant', 'State Licensed', 'Bonded & Insured'].map((badge) => (
             <span key={badge} style={{ fontFamily: 'var(--font-heading)', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--gray-300)' }}>{badge}</span>
           ))}
