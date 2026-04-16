@@ -149,7 +149,7 @@ export default function ElectricianPage() {
       </section>
 
       {/* ====== WHY CHOOSE US ====== */}
-      <section id="why-us" className="section">
+      <section id="why-us" className="section reveal">
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
             <div className="reveal-left">
@@ -208,7 +208,7 @@ export default function ElectricianPage() {
       </section>
 
       {/* ====== PROCESS SECTION ====== */}
-      <section className="section">
+      <section className="section reveal">
         <div className="container">
           <div className="section-header reveal">
             <span className="badge">Our Process</span>
@@ -260,7 +260,7 @@ export default function ElectricianPage() {
       </section>
 
       {/* ====== SERVICE AREAS ====== */}
-      <section className="section">
+      <section className="section reveal">
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
             <div className="reveal-left">
