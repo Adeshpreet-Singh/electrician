@@ -1,386 +1,225 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
 
-export default function ElectricianPage() {
-  const [bannerVisible, setBannerVisible] = useState(true);
+import { useState } from 'react';
+
+export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [formData, setFormData] = useState({ name: '', phone: '', email: '', service: '', message: '' });
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const observerRef = useRef<IntersectionObserver | null>(null);
 
-  useEffect(() => {
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll('.reveal, .reveal-left, .reveal-scale, .stagger-children').forEach((el) => {
-      observerRef.current?.observe(el);
-    });
-    return () => observerRef.current?.disconnect();
-  }, []);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormSubmitted(true);
-    setTimeout(() => setFormSubmitted(false), 5000);
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) { element.scrollIntoView({ behavior: 'smooth' }); element.focus(); }
+    setMenuOpen(false);
   };
 
+  const services = [
+    { title: 'Residential Electrical', desc: 'Wiring, outlets, switches, lighting installation, and whole-home electrical solutions.', price: 'From $89', icon: '🏠' },
+    { title: 'Commercial Services', desc: 'Office buildouts, retail lighting, industrial wiring, and code compliance upgrades.', price: 'Custom Quote', icon: '🏢' },
+    { title: 'EV Charging Stations', desc: 'Level 2 home charger installation, commercial charging networks, and Tesla wall connectors.', price: 'From $799', icon: '⚡' },
+    { title: 'Panel Upgrades', desc: 'Electrical panel replacement, capacity upgrades, and fuse box to breaker conversions.', price: 'From $1,499', icon: '🔌' },
+    { title: 'Generator Installation', desc: 'Whole-home backup generators, transfer switches, and automatic standby systems.', price: 'From $3,999', icon: '🔋' },
+    { title: 'Emergency Repairs', desc: '24/7 emergency electrical service for power outages, sparking outlets, and safety hazards.', price: 'Call Now', icon: '🚨' },
+  ];
+
+  const testimonials = [
+    { name: 'Catherine Moore', role: 'Homeowner', text: 'VoltPro upgraded our 1960s electrical panel and installed a whole-home generator. The work was meticulous, clean, and passed inspection on the first try. True professionals.', rating: 5 },
+    { name: 'Daniel Kim', role: 'Tesla Owner', text: 'They installed my Tesla wall connector in under 3 hours. Clean routing, proper permits, and they even helped me set up the app scheduling. Couldn&apos;t be happier.', rating: 5 },
+    { name: 'Rachel Stevens', role: 'Restaurant Owner', text: 'When our kitchen hood wiring failed during dinner service, VoltPro had someone there in 45 minutes. They diagnosed and fixed the issue without us losing a single order.', rating: 5 },
+  ];
+
   return (
-    <>
-      {/* ====== EMERGENCY BANNER ====== */}
-      {bannerVisible && (
-        <div className="emergency-banner">
-          <div className="emergency-pulse" />/
-          <span className="emergency-icon">⚡</span>/
-          <span>24/7 Emergency Electrical Service</span>
-          <span className="emergency-divider">|</span>/
-          <a href="tel:18005551234" className="emergency-phone">Call Now: (800) 555-1234</a>/
-          <button onClick={() => setBannerVisible(false)} style={{ position: 'absolute', right: '1rem', background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', fontSize: '1.2rem' }}>×</button>/
-        </div>/
-      )}
+    <div className="min-h-screen px-4 md:px-8">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-neon text-dark px-4 py-2 rounded-lg z-[100] focus-visible:outline-2 focus-visible:outline-white font-bold px-4 md:px-8">Skip to main content</a>
 
-      {/* ====== NAVIGATION ====== */}
-      <nav className="nav-bar" style={{ top: bannerVisible ? '2.5rem' : '0' }>>
-        <div>
-          <div className="nav-brand">VOLTPRO ELECTRIC</div>/
-          <div className="nav-tagline">Licensed & Insured Since 2003</div>/
-        </div>/
-        <div className="nav-links">
-          {['Services', 'Why Us', 'Gallery', 'Reviews', 'Contact'].map((item) => (
-            <button key={item> className="nav-link" onClick={() => document.getElementById(item.toLowerCase().replace(' ', '-'))?.scrollIntoView({ behavior: 'smooth' })}>
-              {item}
-            </button>/
-          ))}
-          <button className="project-btn project-btn-primary" style={{ padding: '0.6rem 1.5rem', fontSize: '0.75rem' }>>Get Free Quote</button>/
-        </div>/
-      </nav>/
+      <header>
+        <nav role="navigation" aria-label="Main navigation" className="fixed top-0 left-0 right-0 z-50 glass px-4 md:px-8">
+          <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center px-4 md:px-8">
+            <div className="flex items-center gap-3 px-4 md:px-8">
+              <div className="w-10 h-10 bg-neon/20 rounded-xl flex items-center justify-center text-neon text-xl neon-glow px-4 md:px-8" aria-hidden="true">⚡</div>
+              <div><h1 className="text-lg font-bold text-white px-4 md:px-8" style={{ fontSize: "3rem", fontWeight: "bold", marginBottom: "1.5rem", lineHeight: "1.2" }}>VoltPro</h1><p className="text-[9px] text-neon tracking-widest px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>ELECTRIC</p></div>
+            </div>
+            <div className="hidden md:flex items-center gap-8 px-4 md:px-8">
+              {['Services','About','Reviews','Contact'].map(item => (<button key={item} onClick={() = style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "var(--primary)", color: "white", border: "none", cursor: "pointer", transition: "transform 0.2s, box-shadow 0.2s" }}> scrollToSection(item.toLowerCase())} aria-label={`Navigate to ${item} section`} className="text-sm text-slate-text hover:text-neon transition-colors focus-visible:outline-2 focus-visible:outline-neon focus-visible:outline-offset-2 rounded px-4 md:px-8">{item}</button>))}
+              <button aria-label="Get a free electrical estimate" className="bg-neon text-dark px-6 py-2.5 rounded-full text-sm font-bold hover:bg-neon-dim transition-colors focus-visible:outline-2 focus-visible:outline-neon focus-visible:outline-offset-2 px-4 md:px-8" style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "var(--primary)", color: "white", border: "none", cursor: "pointer", transition: "transform 0.2s, box-shadow 0.2s" }}>Free Estimate</button>
+            </div>
+            <button aria-label={menuOpen?"Close menu":"Open menu"} aria-expanded={menuOpen} className="md:hidden text-neon focus-visible:outline-2 focus-visible:outline-neon rounded px-4 md:px-8" onClick={() = style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "var(--primary)", color: "white", border: "none", cursor: "pointer", transition: "transform 0.2s, box-shadow 0.2s" }}> setMenuOpen(!menuOpen)}>
+              <svg className="w-6 h-6 px-4 md:px-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">{menuOpen?<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/ style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>:<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16"/ style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>}</svg>
+            </button>
+          </div>
+          {menuOpen && (
+            <div className="md:hidden glass border-t border-dark-border px-6 py-4 space-y-4 px-4 md:px-8">
+              {['Services','About','Reviews','Contact'].map(item => (<button key={item} onClick={() = style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "var(--primary)", color: "white", border: "none", cursor: "pointer", transition: "transform 0.2s, box-shadow 0.2s" }}> scrollToSection(item.toLowerCase())} className="block w-full text-left text-slate-text hover:text-neon py-2 px-4 md:px-8">{item}</button>))}
+              <button className="w-full bg-neon text-dark px-6 py-3 rounded-full font-bold px-4 md:px-8" style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "var(--primary)", color: "white", border: "none", cursor: "pointer", transition: "transform 0.2s, box-shadow 0.2s" }}>Free Estimate</button>
+            </div>
+          )}
+        </nav>
+      </header>
 
-      {/* ====== HERO SECTION ====== */}
-      <section className="hero-section" style={{ paddingTop: bannerVisible ? '10rem' : '7rem' }>>
-        <div className="hero-inner">
-          <div className="hero-content">
-            <span className="badge">Award-Winning Electricians</span>/
-            <h1 className="hero-title">Power Your Home With <span className="text-accent">Confidence</span></h1>
-            <p className="hero-desc">
-              From emergency repairs to complete rewiring, VoltPro Electric delivers safe, reliable, and code-compliant electrical solutions for residential and commercial properties across the tri-state area. Our certified master electricians bring over 20 years of expertise to every project, ensuring your home or business stays powered safely and efficiently. We use only premium-grade materials and the latest diagnostic technology to identify issues before they become hazards.
-            </p>/
-            <p className="hero-desc" style={{ marginTop: '-1rem' }>>
-              Whether you need a simple outlet installation, a full panel upgrade, or complex commercial wiring, our team arrives on time, works cleanly, and guarantees every job with our industry-leading 5-year warranty. We understand that electrical issues can be stressful and even dangerous, which is why we offer 24/7 emergency services with response times under 60 minutes. Trust VoltPro to keep your lights on and your family safe./
-            </p>/
-            <div className="hero-actions">
-              <button className="project-btn project-btn-primary">Schedule Service</button>/
-              <button className="project-btn project-btn-outline">Emergency Repair</button>/
-            </div>/
-            <div className="hero-stats">
-              <div>
-                <div className="stat-number">20+</div>/
-                <div className="stat-label">Years Experience</div>/
-              </div>/
-              <div>
-                <div className="stat-number">15K+</div>/
-                <div className="stat-label">Jobs Completed</div>/
-              </div>/
-              <div>
-                <div className="stat-number">4.9★</div>/
-                <div className="stat-label">Google Rating</div>/
-              </div>/
-              <div>
-                <div className="stat-number">&lt;60m</div>/
-                <div className="stat-label">Emergency Response</div>/
-              </div>/
-            </div>/
-          </div>/
-          <div className="hero-image-wrap">
-            <img className="hero-image" src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&h=600&fit=crop" alt="Professional electrician working on panel" />
-            <div className="hero-image-overlay" />/
-          </div>/
-        </div>/
-      </section>/
+      <main id="main-content" role="main">
+        <section aria-labelledby="hero-heading" className="pt-24 pb-16 relative overflow-hidden grid-bg px-4 md:px-8" style={{ padding: "5rem 1rem", marginBottom: "2rem" }}>
+          <div className="absolute inset-0 px-4 md:px-8" aria-hidden="true">
+            <div className="absolute top-20 right-20 w-96 h-96 bg-neon/10 rounded-full blur-[120px] px-4 md:px-8"/>
+            <div className="absolute bottom-20 left-20 w-64 h-64 bg-neon/5 rounded-full blur-[100px] px-4 md:px-8"/>
+          </div>
+          <div className="relative max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center px-4 md:px-8">
+            <div>
+              <p className="text-neon text-sm font-bold tracking-widest mb-4 animate-fade-in-up px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>LICENSED MASTER ELECTRICIANS</p>
+              <h2 id="hero-heading" className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-white animate-fade-in-up stagger-1 px-4 md:px-8" style={{ fontSize: "2.25rem", fontWeight: "bold", marginBottom: "1.25rem", lineHeight: "1.3" }}>Power Your Life<br/><span className="text-neon neon-text px-4 md:px-8">With Confidence.</span></h2>
+              <p className="text-xl text-slate-text mb-8 max-w-lg animate-fade-in-up stagger-2 px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>From simple outlet repairs to complete commercial buildouts, our master electricians deliver safe, code-compliant solutions every time.</p>
+              <div className="flex flex-wrap gap-4 mb-10 animate-fade-in-up stagger-3 px-4 md:px-8">
+                <button aria-label="Get your free electrical estimate" className="bg-neon text-dark px-8 py-4 rounded-full text-lg font-bold hover:bg-neon-dim transition-all hover:scale-105 neon-glow focus-visible:outline-2 focus-visible:outline-neon focus-visible:outline-offset-2 px-4 md:px-8" style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "var(--primary)", color: "white", border: "none", cursor: "pointer", transition: "transform 0.2s, box-shadow 0.2s" }}>Free Estimate</button>
+                <button aria-label="Call for emergency electrical service" className="border-2 border-neon/50 text-neon px-8 py-4 rounded-full text-lg font-bold hover:bg-neon/10 transition-all hover:scale-105 focus-visible:outline-2 focus-visible:outline-neon focus-visible:outline-offset-2 px-4 md:px-8" style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "var(--primary)", color: "white", border: "none", cursor: "pointer", transition: "transform 0.2s, box-shadow 0.2s" }}>Emergency: 24/7</button>
+              </div>
+              <div className="flex items-center gap-8 px-4 md:px-8">
+                {[{num:'18K+',label:'Jobs Completed'},{num:'100%',label:'Code Compliant'},{num:'24/7',label:'Emergency'}].map((s,i) => (<div key={i}><div className="text-2xl font-bold text-neon px-4 md:px-8">{s.num}</div><div className="text-sm text-slate-text px-4 md:px-8">{s.label}</div></div>))}
+              </div>
+            </div>
+            <div className="relative px-4 md:px-8">
+              <div className="glass rounded-3xl p-8 neon-glow px-4 md:px-8">
+                <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&q=80" alt="Licensed electrician working on electrical panel" className="w-full rounded-2xl opacity-90 px-4 md:px-8"/>
+              </div>
+            </div>
+          </div>
+        </section>
 
-      {/* ====== TRUST BADGES ====== */}
-      <section style={{ padding: '3rem 1.5rem', borderBottom: '1px solid var(--dark-border)' }>>
-        <div className="container" style={{ display: 'flex', justifyContent: 'center', gap: '3rem', flexWrap: 'wrap', alignItems: 'center' }>>
-          {['BBB A+ Rated', 'EPA Certified', 'OSHA Compliant', 'State Licensed', 'Bonded & Insured'].map((badge) => (
-            <span key={badge} style={{ fontFamily: 'var(--font-heading)', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--gray-300)' }>>{badge}</span>/
-          ))}
-        </div>/
-      </section>/
+        <section id="services" aria-labelledby="services-heading" className="py-24 relative px-4 md:px-8" style={{ padding: "5rem 1rem", marginBottom: "2rem" }}>
+          <div className="max-w-7xl mx-auto px-6 px-4 md:px-8">
+            <div className="text-center mb-16 px-4 md:px-8">
+              <p className="text-neon text-sm font-bold tracking-widest mb-4 px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>WHAT WE DO</p>
+              <h2 id="services-heading" className="text-4xl font-bold text-white mb-4 px-4 md:px-8" style={{ fontSize: "2.25rem", fontWeight: "bold", marginBottom: "1.25rem", lineHeight: "1.3" }}>Electrical Services</h2>
+              <p className="text-slate-text max-w-2xl mx-auto px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>Comprehensive electrical solutions for homes and businesses. Licensed, insured, and guaranteed.</p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-8">
+              {services.map((s,i) => (
+                <article key={i} className="glass rounded-2xl p-6 hover:border-neon/30 transition-all hover:scale-105 group px-4 md:px-8">
+                  <div className="text-4xl mb-4 px-4 md:px-8" aria-hidden="true">{s.icon}</div>
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-neon transition-colors px-4 md:px-8" style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", lineHeight: "1.4" }}>{s.title}</h3>
+                  <p className="text-slate-text text-sm mb-3 px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>{s.desc}</p>
+                  <div className="text-neon font-bold text-sm px-4 md:px-8">{s.price}</div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
 
-      {/* ====== SERVICES SECTION ====== */}
-      <section id="services" className="section services-section">
-        <div className="container">
-          <div className="section-header reveal">
-            <span className="badge">Our Services</span>/
-            <h2 className="section-title">Complete Electrical Solutions</h2>/
-            <p className="section-subtitle">From minor repairs to major installations, our licensed electricians handle every job with precision, safety, and a commitment to excellence that has made us the regions most trusted electrical contractor.</p>/
-          </div>/
-          <div className="services-grid stagger-children">
-            {[
-              { icon: '🔌', name: 'Panel Upgrades', desc: 'Upgrade your outdated electrical panel to handle modern power demands safely. We install 100-400 amp panels with whole-home surge protection.', price: 'From $1,200', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=300&fit=crop' },/
-              { icon: '💡', name: 'Lighting Design', desc: 'Transform your space with custom lighting solutions including recessed, pendant, landscape, and smart LED installations that save energy.', price: 'From $150', img: 'https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=400&h=300&fit=crop' },/
-              { icon: '🏠', name: 'Whole Home Rewiring', desc: 'Replace outdated knob-and-tube or aluminum wiring with modern copper wiring that meets current safety codes and increases home value.', price: 'From $4,500', img: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=300&fit=crop' },/
-              { icon: '⚡', name: 'EV Charger Install', desc: 'Level 2 home EV charger installation with dedicated 240V circuit. Compatible with Tesla, ChargePoint, and all major EV brands.', price: 'From $800', img: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=400&h=300&fit=crop' },/
-              { icon: '🔧', name: 'Outlet & Switch', desc: 'Install, replace, or upgrade outlets and switches including GFCI protection, USB outlets, dimmers, and smart home compatible devices.', price: 'From $85', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=300&fit=crop' },/
-              { icon: '🔥', name: 'Safety Inspections', desc: 'Comprehensive electrical safety audits using thermal imaging and advanced diagnostics to identify fire hazards and code violations.', price: 'From $199', img: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=400&h=300&fit=crop' },/
-              { icon: '☀️', name: 'Solar Integration', desc: 'Connect your solar panel system to your homes electrical grid with proper inverters, disconnects, and net metering setup.', price: 'From $2,000', img: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=300&fit=crop' },/
-              { icon: '🏢', name: 'Commercial Electrical', desc: 'Full-service commercial electrical for offices, retail, restaurants, and warehouses including tenant buildouts and maintenance contracts.', price: 'Custom Quote', img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop' },/
-            ].map((service) => (
-              <div key={service.name} className="service-card" style={{ padding: 0 }>>
-                <div style={{ height: '140px', overflow: 'hidden', position: 'relative' }>>
-                  <img src={service.img} alt={service.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }> />/
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 40%, rgba(10,10,10,0.9) 100%)' }> />/
-                  <span style={{ position: 'absolute', top: '10px', right: '10px', fontSize: '1.5rem', background: 'rgba(10,10,10,0.7)', padding: '4px 8px', borderRadius: '4px' }>>{service.icon}</span>/
-                </div>/
-                <div style={{ padding: '1.25rem 1.5rem 1.5rem' }>>
-                  <h3 className="service-name">{service.name}</h3>/
-                  <p className="service-desc">{service.desc}</p>/
-                  <div className="service-price">{service.price}</div>/
-                </div>/
-              </div>/
-            ))}
-          </div>/
-        </div>/
-      </section>/
-
-      {/* ====== WHY CHOOSE US ====== */}
-      <section id="why-us" className="section reveal">
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }>>
-            <div className="reveal-left">
-              <span className="badge">Why VoltPro</span>/
-              <h2 className="section-title" style={{ textAlign: 'left', marginTop: '1rem' }>>The Electrician Your Neighbors Trust</h2>/
-              <p style={{ color: 'var(--gray-300)', lineHeight: 1.7, marginBottom: '2rem' }>>
-                When it comes to your homes electrical system, cutting corners is never an option. At VoltPro Electric, we combine old-school craftsmanship with cutting-edge technology to deliver electrical solutions that are safe, efficient, and built to last. Every member of our team is a licensed journeyman or master electrician who has passed rigorous background checks and drug testing.
-              </p>/
-              <p style={{ color: 'var(--gray-300)', lineHeight: 1.7, marginBottom: '2rem' }>>
-                We arrive in fully stocked trucks, wear clean uniforms, use shoe covers and drop cloths, and treat your home with the respect it deserves. Our transparent pricing means no surprises, and our 5-year warranty on all workmanship gives you peace of mind long after the job is done. From the initial consultation to the final walkthrough, we keep you informed and involved every step of the way.
-              </p>/
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }>>
-                {['Licensed & Insured', '5-Year Warranty', 'Upfront Pricing', 'Background Checked', 'Same-Day Service', 'Clean & Courteous', 'Code Compliant', 'Free Estimates'].map((item) => (
-                  <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--gray-300)' }>>
-                    <span style={{ color: 'var(--accent)' }>>✓</span> {item}/
-                  </div>/
-                ))}
-              </div>/
-            </div>/
-            <div className="reveal-scale" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }>>
-              <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=300&fit=crop" alt="Electrician at work" style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '6px' }> />
-              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=300&fit=crop" alt="Electrical panel" style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '6px' }> />
-              <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=400&h=300&fit=crop" alt="Wiring installation" style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '6px' }> />
-              <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=300&fit=crop" alt="Home electrical work" style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '6px' }> />
-            </div>/
-          </div>/
-        </div>/
-      </section>/
-
-      {/* ====== GALLERY ====== */}
-      <section id="gallery" className="section section-alt">
-        <div className="container">
-          <div className="section-header reveal">
-            <span className="badge">Project Gallery</span>/
-            <h2 className="section-title">Recent Electrical Projects</h2>/
-            <p className="section-subtitle">Browse our portfolio of completed residential and commercial electrical installations, upgrades, and custom lighting projects throughout the region.</p>/
-          </div>/
-          <div className="stagger-children" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }>>
-            {[
-              { img: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=500&h=400&fit=crop', label: '200A Panel Upgrade' },/
-              { img: 'https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=500&h=400&fit=crop', label: 'Recessed Lighting' },/
-              { img: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=500&h=400&fit=crop', label: 'EV Charger Station' },/
-              { img: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=500&h=400&fit=crop', label: 'Commercial Wiring' },/
-              { img: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=500&h=400&fit=crop', label: 'Solar Integration' },/
-              { img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=500&h=400&fit=crop', label: 'Office Buildout' },/
-            ].map((item) => (
-              <div key={item.label} style={{ position: 'relative', overflow: 'hidden', borderRadius: '6px', aspectRatio: '4/3', cursor: 'pointer' }>>/
-                <img src={item.img} alt={item.label} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease' }> />/
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 50%, rgba(10,10,10,0.85) 100%)', display: 'flex', alignItems: 'flex-end', padding: '1rem' }>>
-                  <span style={{ fontFamily: 'var(--font-heading)', fontSize: '0.9rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }>>{item.label}</span>/
-                </div>/
-              </div>/
-            ))}
-          </div>/
-        </div>/
-      </section>/
-
-      {/* ====== PROCESS SECTION ====== */}
-      <section className="section reveal">
-        <div className="container">
-          <div className="section-header reveal">
-            <span className="badge">Our Process</span>/
-            <h2 className="section-title">How It Works</h2>/
-            <p className="section-subtitle">Getting professional electrical service has never been easier. Our streamlined 4-step process ensures a hassle-free experience from start to finish.</p>/
-          </div>/
-          <div className="stagger-children" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '2rem' }>>
-            {[
-              { step: '01', title: 'Call or Book', desc: 'Contact us by phone or fill out our online form. We will schedule a convenient time for your free on-site consultation and estimate.' },
-              { step: '02', title: 'Free Assessment', desc: 'Our licensed electrician arrives on time, inspects your electrical system, explains findings clearly, and provides an upfront written quote.' },
-              { step: '03', title: 'Expert Service', desc: 'Once approved, we complete the work efficiently using premium materials, keeping your home clean and minimizing disruption to your day.' },
-              { step: '04', title: 'Final Walkthrough', desc: 'We inspect every detail together, answer your questions, provide maintenance tips, and back everything with our 5-year workmanship warranty.' },
-            ].map((item) => (
-              <div key={item.step} style={{ textAlign: 'center' }>>
-                <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(255,215,0,0.08)', border: '2px solid var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem', fontFamily: 'var(--font-heading)', fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent)' }>>{item.step}</div>/
-                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.1rem', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.75rem' }>>{item.title}</h3>/
-                <p style={{ fontSize: '0.85rem', color: 'var(--gray-300)', lineHeight: 1.65 }>>{item.desc}</p>/
-              </div>/
-            ))}
-          </div>/
-        </div>/
-      </section>/
-
-      {/* ====== TESTIMONIALS ====== */}
-      <section id="reviews" className="section section-alt">
-        <div className="container">
-          <div className="section-header reveal">
-            <span className="badge">Testimonials</span>/
-            <h2 className="section-title">What Our Customers Say</h2>/
-            <p className="section-subtitle">With over 500 five-star reviews, our customers consistently praise our professionalism, punctuality, quality workmanship, and fair pricing.</p>/
-          </div>/
-          <div className="stagger-children" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }>>
-            {[
-              { name: 'Sarah M.', location: 'Westfield, NJ', text: 'VoltPro upgraded our entire panel and installed recessed lighting throughout our home. The electricians were incredibly professional, cleaned up perfectly, and the results exceeded our expectations. Our home has never looked better!' },
-              { name: 'James T.', location: 'Princeton, NJ', text: 'Had an emergency at 11pm when our breaker kept tripping. VoltPro had someone at our door in 45 minutes. They diagnosed a dangerous loose connection, fixed it on the spot, and potentially saved our home from a fire. Cannot recommend them enough.' },
-              { name: 'Linda K.', location: 'Summit, NJ', text: 'We hired VoltPro for our restaurant renovation and they were amazing. They handled all the commercial wiring, kitchen hood connections, and even helped us pass our health inspection by ensuring all GFCI outlets were properly installed. True professionals.' },
-            ].map((review) => (
-              <div key={review.name} className="service-card" style={{ padding: '2rem' }>>
-                <div style={{ color: '#facc15', fontSize: '1.1rem', letterSpacing: '2px', marginBottom: '1rem' }>>★★★★★</div>/
-                <p style={{ fontSize: '0.9rem', color: 'var(--gray-300)', lineHeight: 1.7, marginBottom: '1.5rem', fontStyle: 'italic' }>>{review.text}</p>/
-                <div>
-                  <div style={{ fontWeight: 600, fontSize: '0.9rem' }>>{review.name}</div>/
-                  <div style={{ fontSize: '0.8rem', color: 'var(--gray-300)' }>>{review.location}</div>/
-                </div>/
-              </div>/
-            ))}
-          </div>/
-        </div>/
-      </section>/
-
-      {/* ====== SERVICE AREAS ====== */}
-      <section className="section reveal">
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }>>
-            <div className="reveal-left">
-              <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&h=450&fit=crop" alt="Service area map" style={{ width: '100%', height: '400px', objectFit: 'cover', borderRadius: '6px' }> />
-            </div>/
-            <div className="reveal">
-              <span className="badge">Service Area</span>/
-              <h2 className="section-title" style={{ textAlign: 'left', marginTop: '1rem' }>>Proudly Serving the Tri-State Area</h2>/
-              <p style={{ color: 'var(--gray-300)', lineHeight: 1.7, marginBottom: '2rem' }>>
-                VoltPro Electric provides comprehensive residential and commercial electrical services across New Jersey, New York, and Connecticut. Our fleet of fully equipped service vehicles ensures rapid response times and efficient service delivery to homes and businesses within a 50-mile radius of our central hub.
-              </p>/
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }>>
-                {['Westfield, NJ', 'Princeton, NJ', 'Summit, NJ', 'Morristown, NJ', 'Edison, NJ', 'New Brunswick, NJ', 'White Plains, NY', 'Stamford, CT'].map((area) => (
-                  <div key={area} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--gray-300)' }>>
-                    <span style={{ color: 'var(--accent)' }>>📍</span> {area}/
-                  </div>/
-                ))}
-              </div>/
-            </div>/
-          </div>/
-        </div>/
-      </section>/
-
-      {/* ====== CONTACT / BOOKING ====== */}/
-      <section id="contact" className="section section-alt">
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem' }>>
-            <div className="reveal-left">
-              <span className="badge">Get In Touch</span>/
-              <h2 className="section-title" style={{ textAlign: 'left', marginTop: '1rem' }>>Book Your Free Estimate</h2>/
-              <p style={{ color: 'var(--gray-300)', lineHeight: 1.7, marginBottom: '2rem' }>>
-                Ready to get started? Fill out the form and one of our certified electricians will contact you within 2 hours during business hours. For emergencies, call us directly at (800) 555-1234. We offer free estimates on all projects over $500 and our pricing is always transparent with no hidden fees.
-              </p>/
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }>>
+        <section id="about" aria-labelledby="about-heading" className="py-24 relative px-4 md:px-8" style={{ padding: "5rem 1rem", marginBottom: "2rem" }}>
+          <div className="absolute inset-0 px-4 md:px-8" aria-hidden="true">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-neon/5 rounded-full blur-[150px] px-4 md:px-8"/>
+          </div>
+          <div className="relative max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center px-4 md:px-8">
+            <div className="glass rounded-3xl p-8 px-4 md:px-8">
+              <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&q=80" alt="VoltPro Electric certified team" className="w-full rounded-2xl opacity-90 px-4 md:px-8"/>
+            </div>
+            <div>
+              <p className="text-neon text-sm font-bold tracking-widest mb-4 px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>WHY VOLTPRO</p>
+              <h2 id="about-heading" className="text-4xl font-bold text-white mb-6 px-4 md:px-8" style={{ fontSize: "2.25rem", fontWeight: "bold", marginBottom: "1.25rem", lineHeight: "1.3" }}>18,000+ Jobs Done Right</h2>
+              <p className="text-slate-text mb-8 px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>VoltPro Electric has been powering homes and businesses since 2007. Our team of licensed master electricians brings decades of combined experience to every project.</p>
+              <div className="grid grid-cols-2 gap-4 px-4 md:px-8">
                 {[
-                  { icon: '📞', label: 'Phone', value: '(800) 555-1234' },
-                  { icon: '✉️', label: 'Email', value: 'info@voltproelectric.com' },
-                  { icon: '🕐', label: 'Hours', value: 'Mon-Fri 7am-7pm, Sat 8am-4pm' },
-                  { icon: '🚨', label: 'Emergency', value: '24/7 Available' },/
-                ].map((item) => (
-                  <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }>>
-                    <span style={{ fontSize: '1.5rem' }>>{item.icon}</span>/
-                    <div>
-                      <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--gray-500)', fontFamily: 'var(--font-heading)' }>>{item.label}</div>/
-                      <div style={{ fontSize: '0.95rem', fontWeight: 500 }>>{item.value}</div>/
-                    </div>/
-                  </div>/
+                  { icon: '✓', text: 'Master Electricians' },
+                  { icon: '✓', text: 'Licensed & Insured' },
+                  { icon: '✓', text: 'Code Compliant' },
+                  { icon: '✓', text: 'Free Estimates' },
+                  { icon: '✓', text: 'Lifetime Warranty' },
+                  { icon: '✓', text: 'EV Certified' },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-2 px-4 md:px-8">
+                    <span className="text-neon px-4 md:px-8" aria-hidden="true">{item.icon}</span>
+                    <span className="text-sm text-white-soft px-4 md:px-8">{item.text}</span>
+                  </div>
                 ))}
-              </div>/
-              <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&h=300&fit=crop" alt="VoltPro team" style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '6px', marginTop: '2rem' }> />
-            </div>/
-            <div className="reveal-scale">
-              <div className="service-card" style={{ padding: '2rem' }>>
-                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', fontWeight: 700, textTransform: 'uppercase', marginBottom: '1.5rem' }>>Request Service</h3>/
-                {formSubmitted ? (
-                  <div style={{ textAlign: 'center', padding: '3rem 1rem' }>>
-                    <div style={{ fontSize: '3rem', marginBottom: '1rem' }>>✅</div>/
-                    <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', marginBottom: '0.5rem' }>>Thank You!</h4>/
-                    <p style={{ color: 'var(--gray-300)', fontSize: '0.9rem' }>>We will contact you within 2 hours to confirm your appointment.</p>/
-                  </div>/
-                ) : (
-                  <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-                    <input type="text" placeholder="Full Name" value={formData.name> onChange={(e) => setFormData({ ...formData, name: e.target.value })} style={{ background: 'var(--dark)', border: '1px solid var(--dark-border)', borderRadius: '4px', padding: '0.75rem 1rem', color: 'var(--white)', fontSize: '0.9rem' }} required />/
-                    <input type="tel" placeholder="Phone Number" value={formData.phone> onChange={(e) => setFormData({ ...formData, phone: e.target.value })} style={{ background: 'var(--dark)', border: '1px solid var(--dark-border)', borderRadius: '4px', padding: '0.75rem 1rem', color: 'var(--white)', fontSize: '0.9rem' }} required />/
-                    <input type="email" placeholder="Email Address" value={formData.email> onChange={(e) => setFormData({ ...formData, email: e.target.value })} style={{ background: 'var(--dark)', border: '1px solid var(--dark-border)', borderRadius: '4px', padding: '0.75rem 1rem', color: 'var(--white)', fontSize: '0.9rem' }} />/
-                    <select value={formData.service> onChange={(e) => setFormData({ ...formData, service: e.target.value })} style={{ background: 'var(--dark)', border: '1px solid var(--dark-border)', borderRadius: '4px', padding: '0.75rem 1rem', color: 'var(--white)', fontSize: '0.9rem' }}>
-                      <option value="">Select Service</option>/
-                      <option>Panel Upgrade</option>/
-                      <option>Lighting Installation</option>/
-                      <option>Rewiring</option>/
-                      <option>EV Charger</option>/
-                      <option>Electrical Inspection</option>/
-                      <option>Emergency Repair</option>/
-                      <option>Other</option>/
-                    </select>/
-                    <textarea placeholder="Describe your project..." rows={4} value={formData.message> onChange={(e) => setFormData({ ...formData, message: e.target.value })} style={{ background: 'var(--dark)', border: '1px solid var(--dark-border)', borderRadius: '4px', padding: '0.75rem 1rem', color: 'var(--white)', fontSize: '0.9rem', resize: 'vertical' }} />/
-                    <button type="submit" className="project-btn btn-primary project-btn-full">Submit Request</button>/
-                  </form>/
-                )}
-              </div>/
-            </div>/
-          </div>/
-        </div>/
-      </section>/
+              </div>
+            </div>
+          </div>
+        </section>
 
-      {/* ====== FOOTER ====== */}
-      <footer style={{ background: 'var(--dark-surface)', borderTop: '1px solid var(--dark-border)', padding: '4rem 1.5rem 2rem' }>>
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '3rem', marginBottom: '3rem' }>>
-            <div>
-              <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '1rem' }>>VoltPro Electric</div>/
-              <p style={{ fontSize: '0.85rem', color: 'var(--gray-300)', lineHeight: 1.7, marginBottom: '1rem' }>>Professional residential and commercial electrical services. Licensed, insured, and committed to safety and excellence since 2003.</p>/
-              <p style={{ fontSize: '0.85rem', color: 'var(--gray-500)' }>>License #EL-2847193</p>/
-            </div>/
-            <div>
-              <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem', color: 'var(--accent)' }>>Services</h4>/
-              {['Panel Upgrades', 'Lighting', 'Rewiring', 'EV Chargers', 'Safety Inspections', 'Commercial'].map((s) => (
-                <div key={s} style={{ fontSize: '0.8rem', color: 'var(--gray-300)', marginBottom: '0.5rem', cursor: 'pointer' }>>{s}</div>/
+        <section id="reviews" aria-labelledby="reviews-heading" className="py-24 relative px-4 md:px-8" style={{ padding: "5rem 1rem", marginBottom: "2rem" }}>
+          <div className="max-w-7xl mx-auto px-6 px-4 md:px-8">
+            <div className="text-center mb-16 px-4 md:px-8">
+              <p className="text-neon text-sm font-bold tracking-widest mb-4 px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>TESTIMONIALS</p>
+              <h2 id="reviews-heading" className="text-4xl font-bold text-white mb-4 px-4 md:px-8" style={{ fontSize: "2.25rem", fontWeight: "bold", marginBottom: "1.25rem", lineHeight: "1.3" }}>What Our Clients Say</h2>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6 px-4 md:px-8">
+              {testimonials.map((t, i) => (
+                <article key={i} className="glass rounded-2xl p-6 px-4 md:px-8">
+                  <div className="flex gap-1 mb-4 px-4 md:px-8" aria-label={`${t.rating} out of 5 stars`}>
+                    {[...Array(t.rating)].map((_, j) => (
+                      <span key={j} className="text-amber px-4 md:px-8" aria-hidden="true">★</span>
+                    ))}
+                  </div>
+                  <p className="text-white-soft mb-6 italic px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>&ldquo;{t.text}&rdquo;</p>
+                  <div>
+                    <p className="font-bold text-white px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>{t.name}</p>
+                    <p className="text-sm text-slate-text px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>{t.role}</p>
+                  </div>
+                </article>
               ))}
-            </div>/
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" aria-labelledby="contact-heading" className="py-24 relative px-4 md:px-8" style={{ padding: "5rem 1rem", marginBottom: "2rem" }}>
+          <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 px-4 md:px-8">
             <div>
-              <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem', color: 'var(--accent)' }>>Company</h4>/
-              {['About Us', 'Careers', 'Blog', 'Financing', 'Warranty', 'Contact'].map((s) => (
-                <div key={s} style={{ fontSize: '0.8rem', color: 'var(--gray-300)', marginBottom: '0.5rem', cursor: 'pointer' }>>{s}</div>/
-              ))}
-            </div>/
-            <div>
-              <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem', color: 'var(--accent)' }>>Contact</h4>/
-              <div style={{ fontSize: '0.8rem', color: 'var(--gray-300)', lineHeight: 2 }>>
-                <div>(800) 555-1234</div>/
-                <div>info@voltproelectric.com</div>/
-                <div>123 Industrial Blvd<br />Westfield, NJ 07090</div>
-              </div>/
-            </div>/
-          </div>/
-          <div style={{ borderTop: '1px solid var(--dark-border)', paddingTop: '1.5rem', textAlign: 'center', fontSize: '0.75rem', color: 'var(--gray-500)' }>>
-            © 2026 VoltPro Electric. All rights reserved. | Privacy Policy | Terms of Service
-          </div>/
-        </div>/
-      </footer>/
-    </>/
+              <p className="text-neon text-sm font-bold tracking-widest mb-4 px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>GET STARTED</p>
+              <h2 id="contact-heading" className="text-4xl font-bold text-white mb-6 px-4 md:px-8" style={{ fontSize: "2.25rem", fontWeight: "bold", marginBottom: "1.25rem", lineHeight: "1.3" }}>Request Your Free Estimate</h2>
+              <p className="text-slate-text mb-8 px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>Tell us about your electrical needs and we&apos;ll provide a detailed estimate. No obligations, no surprises.</p>
+              <div className="space-y-4 px-4 md:px-8">
+                <div className="flex items-center gap-4 px-4 md:px-8">
+                  <div className="w-12 h-12 bg-neon/10 rounded-xl flex items-center justify-center text-neon px-4 md:px-8" aria-hidden="true">📞</div>
+                  <div><p className="text-sm text-slate-text px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>Call Us</p><p className="text-white font-bold px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>(555) 567-VOLT</p></div>
+                </div>
+                <div className="flex items-center gap-4 px-4 md:px-8">
+                  <div className="w-12 h-12 bg-neon/10 rounded-xl flex items-center justify-center text-neon px-4 md:px-8" aria-hidden="true">📍</div>
+                  <div><p className="text-sm text-slate-text px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>Visit Us</p><p className="text-white font-bold px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>1234 Electric Ave</p></div>
+                </div>
+              </div>
+            </div>
+            <div className="glass rounded-2xl p-8 px-4 md:px-8">
+              <form noValidate className="space-y-6 px-4 md:px-8">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-white-soft mb-2 px-4 md:px-8">Your Name</label>
+                  <input id="name" type="text" aria-required="true" placeholder="John Smith" className="w-full bg-dark-card border border-dark-border rounded-xl px-4 py-3 text-white placeholder-slate-text/50 focus:border-neon focus:ring-1 focus:ring-neon focus:outline-none transition-colors px-4 md:px-8"/>
+                </div>
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-white-soft mb-2 px-4 md:px-8">Phone</label>
+                  <input id="phone" type="tel" aria-required="true" placeholder="(555) 000-0000" className="w-full bg-dark-card border border-dark-border rounded-xl px-4 py-3 text-white placeholder-slate-text/50 focus:border-neon focus:ring-1 focus:ring-neon focus:outline-none transition-colors px-4 md:px-8"/>
+                </div>
+                <div>
+                  <label htmlFor="service-type" className="block text-sm font-medium text-white-soft mb-2 px-4 md:px-8">Service Needed</label>
+                  <select id="service-type" className="w-full bg-dark-card border border-dark-border rounded-xl px-4 py-3 text-white focus:border-neon focus:ring-1 focus:ring-neon focus:outline-none transition-colors px-4 md:px-8">
+                    <option value="">Select service</option>
+                    <option value="residential">Residential</option>
+                    <option value="commercial">Commercial</option>
+                    <option value="ev-charging">EV Charging</option>
+                    <option value="panel-upgrade">Panel Upgrade</option>
+                    <option value="emergency">Emergency</option>
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="details" className="block text-sm font-medium text-white-soft mb-2 px-4 md:px-8">Describe Your Needs</label>
+                  <textarea id="details" rows={3} placeholder="Tell us about your electrical project..." className="w-full bg-dark-card border border-dark-border rounded-xl px-4 py-3 text-white placeholder-slate-text/50 focus:border-neon focus:ring-1 focus:ring-neon focus:outline-none transition-colors resize-none px-4 md:px-8"/>
+                </div>
+                <button type="submit" aria-label="Request your free electrical estimate" className="w-full bg-neon text-dark py-4 rounded-xl font-bold hover:bg-neon-dim transition-all hover:scale-[1.02] neon-glow focus-visible:outline-2 focus-visible:outline-neon focus-visible:outline-offset-2 px-4 md:px-8" style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "var(--primary)", color: "white", border: "none", cursor: "pointer", transition: "transform 0.2s, box-shadow 0.2s" }}>Get Free Estimate</button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer role="contentinfo" className="py-12 border-t border-dark-border px-4 md:px-8">
+        <div className="max-w-7xl mx-auto px-6 px-4 md:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 px-4 md:px-8">
+            <div className="flex items-center gap-3 px-4 md:px-8">
+              <div className="w-8 h-8 bg-neon/20 rounded-lg flex items-center justify-center text-neon px-4 md:px-8" aria-hidden="true">⚡</div>
+              <span className="text-white font-bold px-4 md:px-8">VoltPro Electric</span>
+            </div>
+            <p className="text-slate-text text-sm px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>Licensed Master Electricians | NEC Compliant | ESA Member</p>
+          </div>
+          <div className="mt-8 pt-8 border-t border-dark-border text-center px-4 md:px-8">
+            <p className="text-slate-text/60 text-xs px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>© 2024 VoltPro Electric. All rights reserved. License #EL-2007-8921</p>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 }
