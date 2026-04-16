@@ -91,11 +91,11 @@ body {
 
 @keyframes pulse-icon {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  50% { opacity: 0.85; }
 }
 
 .emergency-divider {
-  opacity: 0.5;
+  opacity: 0.85;
 }
 
 .emergency-phone {
@@ -175,21 +175,7 @@ body {
 /* ========================= */
 /* BUTTONS                   */
 /* ========================= */
-.btn {
-  display: inline-block;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  padding: 0.85rem 2rem;
-  border-radius: 3px;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  text-align: center;
-}
+
 
 .btn-primary {
   background: linear-gradient(135deg, var(--accent), var(--accent-dark));
@@ -314,7 +300,7 @@ body {
 
 @keyframes hero-glow {
   0% { opacity: 0.4; transform: scale(1); }
-  100% { opacity: 0.7; transform: scale(1.15); }
+  100% { opacity: 0.95; transform: scale(1.15); }
 }
 
 .hero-inner {
@@ -1045,3 +1031,69 @@ h3 { font-size: max(1.25rem, inherit); }
   section { padding-left: 1rem !important; padding-right: 1rem !important; }
   nav button, nav a { font-size: 14px !important; }
 }
+
+.project-btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #0a0a0a;
+  color: white;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.project-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.project-btn-outline {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  color: #0a0a0a;
+  border: 2px solid #0a0a0a;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+}
+
+.project-btn-outline:hover {
+  background: #0a0a0a;
+  color: white;
+}
+
+.nav-link {
+  background: transparent;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  opacity: 0.8;
+}
+
+.faq-trigger {
+  background: transparent;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button { cursor: pointer; }

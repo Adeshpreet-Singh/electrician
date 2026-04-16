@@ -57,7 +57,7 @@ export default function ElectricianPage() {
               {item}
             </button>
           ))}
-          <button className="btn btn-primary" style={{ padding: '0.6rem 1.5rem', fontSize: '0.75rem' }}>Get Free Quote</button>
+          <button className="project-btn project-btn-primary" style={{ padding: '0.6rem 1.5rem', fontSize: '0.75rem' }}>Get Free Quote</button>
         </div>
       </nav>
 
@@ -74,8 +74,8 @@ export default function ElectricianPage() {
               Whether you need a simple outlet installation, a full panel upgrade, or complex commercial wiring, our team arrives on time, works cleanly, and guarantees every job with our industry-leading 5-year warranty. We understand that electrical issues can be stressful and even dangerous, which is why we offer 24/7 emergency services with response times under 60 minutes. Trust VoltPro to keep your lights on and your family safe.
             </p>
             <div className="hero-actions">
-              <button className="btn btn-primary">Schedule Service</button>
-              <button className="btn btn-outline">Emergency Repair</button>
+              <button className="project-btn project-btn-primary">Schedule Service</button>
+              <button className="project-btn project-btn-outline">Emergency Repair</button>
             </div>
             <div className="hero-stats">
               <div>
@@ -337,7 +337,7 @@ export default function ElectricianPage() {
                       <option>Other</option>
                     </select>
                     <textarea placeholder="Describe your project..." rows={4} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} style={{ background: 'var(--dark)', border: '1px solid var(--dark-border)', borderRadius: '4px', padding: '0.75rem 1rem', color: 'var(--white)', fontSize: '0.9rem', resize: 'vertical' }} />
-                    <button type="submit" className="btn btn-primary btn-full">Submit Request</button>
+                    <button type="submit" className="project-btn btn-primary project-btn-full">Submit Request</button>
                   </form>
                 )}
               </div>
