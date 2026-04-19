@@ -109,18 +109,18 @@ export default function Home() {
  </svg>
  </button>
  </nav>
- {menuOpen && (
- <div className="md:hidden fixed top-[57px] left-0 right-0 z-40 p-6 space-y-4">
- {navItems.map(item => (
- <button key={item} onClick={() => scrollToSection(item.toLowerCase())} className="block w-full text-left py-3 text-sm uppercase tracking-widest">
- {item}
- </button>
- ))}
- <button onClick={() => scrollToSection('contact')} className="btn-primary w-full rounded-full py-3 font-bold text-sm">
- Free Estimate
- </button>
- </div>
- )}
+{menuOpen && (
+  <div className="md:hidden fixed top-[57px] left-0 right-0 z-40 p-6 space-y-4 nav-mobile-menu">
+    {navItems.map(item => (
+      <button key={item} onClick={() => scrollToSection(item.toLowerCase())} className="nav-mobile-link">
+        {item}
+      </button>
+    ))}
+    <button onClick={() => scrollToSection('contact')} className="btn-primary w-full rounded-full py-3 font-bold text-sm min-h-[48px]">
+      Free Estimate
+    </button>
+  </div>
+)}
  </header>
 
  <main id="main-content" role="main">
