@@ -7,6 +7,24 @@
 
 @import "tailwindcss";
 
+@theme inline {
+  --color-dark: #0a0a0a;
+  --color-dark-surface: #111111;
+  --color-dark-card: #161616;
+  --color-dark-border: #252525;
+  --color-accent: #ffd700;
+  --color-accent-dark: #b8960f;
+  --color-accent-glow: rgba(255, 215, 0, 0.3);
+  --color-red: #dc2626;
+  --color-red-dark: #b91c1c;
+  --color-white: #ffffff;
+  --color-gray-100: #f5f5f5;
+  --color-gray-300: #cccccc;
+  --color-gray-500: #888888;
+  --font-heading: 'Barlow Condensed', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
 /* ========================= */
 /* CSS VARIABLES             */
 /* ========================= */
@@ -1067,17 +1085,6 @@ h3 { font-size: max(1.25rem, inherit); }
   color: white;
 }
 
-.nav-link {
-  background: transparent;
-  border: none;
-  padding: 0.5rem 1rem;
-  color: inherit;
-  font-size: inherit;
-  cursor: pointer;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
 .nav-link:hover {
   opacity: 0.8;
 }
@@ -1174,4 +1181,73 @@ button { cursor: pointer; }
   background-repeat: no-repeat;
   background-size: 1.5em 1.5em;
   padding-right: 2.5rem;
+}
+
+
+/* Typography hierarchy */
+h1, h2, h3, h4, h5, h6 { line-height: 1.2; letter-spacing: -0.02em; }
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; }
+h2 { font-size: clamp(1.5rem, 3.5vw, 2.5rem); font-weight: 700; }
+h3 { font-size: clamp(1.2rem, 2.5vw, 1.75rem); font-weight: 600; }
+p, li, td, th, label, span, a {
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  line-height: 1.7;
+}
+
+/* Contrast - Use CSS variables for dark theme */
+body, p, li, td, span { color: var(--white); }
+h1, h2, h3, h4, h5, h6 { color: var(--white); }
+
+/* Section spacing */
+section, .section, [class*="section"] {
+  padding-top: clamp(3rem, 8vw, 6rem);
+  padding-bottom: clamp(3rem, 8vw, 6rem);
+  padding-left: clamp(1rem, 4vw, 2rem);
+  padding-right: clamp(1rem, 4vw, 2rem);
+}
+header, footer, nav {
+  padding-left: clamp(1rem, 3vw, 2rem);
+  padding-right: clamp(1rem, 3vw, 2rem);
+}
+
+/* Nav fix */
+nav, header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+nav a, nav button, header a, header button {
+  padding: 0.5rem 0.75rem;
+  text-decoration: none;
+}
+[class*="desktop-nav"], [class*="nav-links"], [class*="nav-menu"],
+[class*="hidden"][class*="flex"] {
+  display: flex !important;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Buttons */
+button, [class*="btn"], [class*="button"], [class*="cta"] {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+/* Grid gaps */
+[class*="grid"] { gap: clamp(1rem, 3vw, 2rem); }
+
+/* Forms */
+/* Form styles are inherited from the design system above */
+
+/* Responsive */
+@media (max-width: 768px) {
+  [class*="desktop-nav"], [class*="hidden"][class*="flex"] {
+    display: none !important;
+  }
+  section { padding-top: 2rem; padding-bottom: 2rem; }
 }
