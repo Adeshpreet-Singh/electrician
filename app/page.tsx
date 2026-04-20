@@ -179,7 +179,7 @@ export default function Home() {
  </div>
  <div className="services-grid">
  {services.map((s, i) => (
- <article key={i} className="service-card reveal">
+ <article key={i} className="service-card reveal hover-lift">
  <div className="service-icon" aria-hidden="true">{s.icon}</div>
  <h3 className="service-name">{s.title}</h3>
  <p className="service-desc">{s.desc}</p>
