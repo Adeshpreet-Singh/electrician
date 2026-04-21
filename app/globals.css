@@ -29,6 +29,15 @@
 /* CSS VARIABLES             */
 /* ========================= */
 :root {
+  /* Added: previously undefined variables */
+    --bg-primary: #ffffff;
+    --border: #e5e7eb;
+    --primary: #2563eb;
+    --radius-md: 0.5rem;
+    --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+    --text-muted: #6b7280;
+    --text-primary: #1a1a2e;
+    --transition: all 0.3s ease;
   --dark: #0a0a0a;
   --dark-surface: #111111;
   --dark-card: #161616;
