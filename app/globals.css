@@ -1294,3 +1294,10 @@ button, [class*="btn"], [class*="button"], [class*="cta"] {
 .hover-glow { transition: all 0.3s ease; }
 .hover-glow:hover { box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
 
+
+
+.section-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
