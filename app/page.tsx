@@ -37,12 +37,12 @@ export default function Home() {
  };
 
  const services = [
- { title: 'Residential Electrical', desc: 'Wiring, outlets, switches, lighting installation, and whole-home electrical solutions.', price: 'From $89', icon: '🏠' },
- { title: 'Commercial Services', desc: 'Office buildouts, retail lighting, industrial wiring, and code compliance upgrades.', price: 'Custom Quote', icon: '🏢' },
+ { title: 'Residential Electrical', desc: 'Wiring, outlets, switches, lighting installation, and whole-home electrical solutions.', price: 'From $89', icon: '' },
+ { title: 'Commercial Services', desc: 'Office buildouts, retail lighting, industrial wiring, and code compliance upgrades.', price: 'Custom Quote', icon: '' },
  { title: 'EV Charging Stations', desc: 'Level 2 home charger installation, commercial charging networks, and Tesla wall connectors.', price: 'From $799', icon: '⚡' },
- { title: 'Panel Upgrades', desc: 'Electrical panel replacement, capacity upgrades, and fuse box to breaker conversions.', price: 'From $1,499', icon: '🔌' },
- { title: 'Generator Installation', desc: 'Whole-home backup generators, transfer switches, and automatic standby systems.', price: 'From $3,999', icon: '🔋' },
- { title: 'Emergency Repairs', desc: '24/7 emergency electrical service for power outages, sparking outlets, and safety hazards.', price: 'Call Now', icon: '🚨' },
+ { title: 'Panel Upgrades', desc: 'Electrical panel replacement, capacity upgrades, and fuse box to breaker conversions.', price: 'From $1,499', icon: '' },
+ { title: 'Generator Installation', desc: 'Whole-home backup generators, transfer switches, and automatic standby systems.', price: 'From $3,999', icon: '' },
+ { title: 'Emergency Repairs', desc: '24/7 emergency electrical service for power outages, sparking outlets, and safety hazards.', price: 'Call Now', icon: '' },
  ];
 
  const testimonials = [
@@ -285,7 +285,7 @@ export default function Home() {
  </div>
  <div>
  <p>
- 🚨 24/7 Emergency Service Available
+  24/7 Emergency Service Available
  </p>
  <p>
  Power outage? Sparking wires? Call us anytime — day or night.
@@ -368,7 +368,7 @@ export default function Home() {
  <div className="reveal">
  <div className="contact-details">
  <div className="contact-item">
- <div className="contact-icon" aria-hidden="true">📞</div>
+ <div className="contact-icon" aria-hidden="true"></div>
  <div>
  <p className="contact-label">Call Us</p>
  <a href="tel:+15555678658" className="contact-value">(555) 567-VOLT</a>
@@ -382,14 +382,14 @@ export default function Home() {
  </div>
  </div>
  <div className="contact-item">
- <div className="contact-icon" aria-hidden="true">📍</div>
+ <div className="contact-icon" aria-hidden="true"></div>
  <div>
  <p className="contact-label">Visit Us</p>
  <p className="contact-value-muted">1234 Electric Ave, Austin, TX 78701</p>
  </div>
  </div>
  <div className="contact-item">
- <div className="contact-icon" aria-hidden="true">💬</div>
+ <div className="contact-icon" aria-hidden="true"></div>
  <div>
  <p className="contact-label">WhatsApp</p>
  <a href="https://wa.me/15555678658" target="_blank" rel="noopener noreferrer" className="contact-value">Chat on WhatsApp</a>
