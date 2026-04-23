@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "VoltPro Electric",
-    url: "https://voltproelectric.com",
+    url: "[WEBSITE]",
     images: [
       {
         url: "/images/photo-1621905252507-b35492cc74b4.jpg",
@@ -57,7 +57,7 @@ export default function RootLayout({
               "@type": "Electrician",
               name: "VoltPro Electric",
               telephone: "+15555678658",
-              email: "info@voltproelectric.com",
+              email: "[EMAIL]",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "1234 Electric Ave",

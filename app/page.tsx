@@ -39,7 +39,7 @@ export default function Home() {
  const services = [
  { title: 'Residential Electrical', desc: 'Wiring, outlets, switches, lighting installation, and whole-home electrical solutions.', price: 'From $89', icon: '' },
  { title: 'Commercial Services', desc: 'Office buildouts, retail lighting, industrial wiring, and code compliance upgrades.', price: 'Custom Quote', icon: '' },
- { title: 'EV Charging Stations', desc: 'Level 2 home charger installation, commercial charging networks, and Tesla wall connectors.', price: 'From $799', icon: '⚡' },
+ { title: 'EV Charging Stations', desc: 'Level 2 home charger installation, commercial charging networks, and Tesla wall connectors.', price: 'From $799', icon: '' },
  { title: 'Panel Upgrades', desc: 'Electrical panel replacement, capacity upgrades, and fuse box to breaker conversions.', price: 'From $1,499', icon: '' },
  { title: 'Generator Installation', desc: 'Whole-home backup generators, transfer switches, and automatic standby systems.', price: 'From $3,999', icon: '' },
  { title: 'Emergency Repairs', desc: '24/7 emergency electrical service for power outages, sparking outlets, and safety hazards.', price: 'Call Now', icon: '' },
@@ -69,16 +69,16 @@ export default function Home() {
  {/* Emergency Banner */}
  <div className="emergency-banner">
  <div className="emergency-pulse" aria-hidden="true" />
- <span className="emergency-icon" aria-hidden="true">⚡</span>
+ <span className="emergency-icon" aria-hidden="true"></span>
  <span>24/7 Emergency Electrical Service</span>
  <span className="emergency-divider" aria-hidden="true">|</span>
- <a href="tel:+15555678658" className="emergency-phone">(555) 567-VOLT</a>
+ <a href="tel:[PHONE]" className="emergency-phone">[PHONE]</a>
  </div>
 
  <header>
  <nav role="navigation" aria-label="Main navigation" className="nav-bar">
  <div className="flex items-center gap-3">
- <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl" aria-hidden="true">⚡</div>
+ <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl" aria-hidden="true"></div>
  <div>
  <span className="nav-brand">VoltPro</span>
  <span className="nav-tagline">ELECTRIC</span>
@@ -110,16 +110,16 @@ export default function Home() {
  </button>
  </nav>
 {menuOpen && (
-  <div className="md:hidden fixed top-[57px] left-0 right-0 z-40 p-6 space-y-4 nav-mobile-menu">
-    {navItems.map(item => (
-      <button key={item} onClick={() => scrollToSection(item.toLowerCase())} className="nav-mobile-link">
-        {item}
-      </button>
-    ))}
-    <button onClick={() => scrollToSection('contact')} className="btn-primary w-full rounded-full py-3 font-bold text-sm min-h-[48px]">
-      Free Estimate
-    </button>
-  </div>
+ <div className="md:hidden fixed top-[57px] left-0 right-0 z-40 p-6 space-y-4 nav-mobile-menu">
+ {navItems.map(item => (
+ <button key={item} onClick={() => scrollToSection(item.toLowerCase())} className="nav-mobile-link">
+ {item}
+ </button>
+ ))}
+ <button onClick={() => scrollToSection('contact')} className="btn-primary w-full rounded-full py-3 font-bold text-sm min-h-[48px]">
+ Free Estimate
+ </button>
+ </div>
 )}
  </header>
 
@@ -140,8 +140,8 @@ export default function Home() {
  <button onClick={() => scrollToSection('contact')} className="btn-primary rounded-full px-8 py-4 text-base font-bold">
  Get Free Estimate
  </button>
- <a href="tel:+15555678658" className="btn-outline rounded-full px-8 py-4 text-base font-bold inline-block text-center">
- Call (555) 567-VOLT
+ <a href="tel:[PHONE]" className="btn-outline rounded-full px-8 py-4 text-base font-bold inline-block text-center">
+ Call [PHONE]
  </a>
  </div>
  <div className="hero-stats">
@@ -149,7 +149,7 @@ export default function Home() {
  { num: '18K+', label: 'Jobs Completed' },
  { num: '100%', label: 'Code Compliant' },
  { num: '24/7', label: 'Emergency' },
- { num: '4.9★', label: 'Google Rating' },
+ { num: '4.9', label: 'Google Rating' },
  ].map((s, i) => (
  <div key={i}>
  <div className="stat-number">{s.num}</div>
@@ -236,12 +236,12 @@ export default function Home() {
  </p>
  <div className="grid grid-cols-2 gap-4">
  {[
- { icon: '✓', text: 'Master Electricians' },
- { icon: '✓', text: 'Licensed & Insured' },
- { icon: '✓', text: 'Code Compliant' },
- { icon: '✓', text: 'Free Estimates' },
- { icon: '✓', text: 'Lifetime Warranty' },
- { icon: '✓', text: 'EV Certified' },
+ { icon: '', text: 'Master Electricians' },
+ { icon: '', text: 'Licensed & Insured' },
+ { icon: '', text: 'Code Compliant' },
+ { icon: '', text: 'Free Estimates' },
+ { icon: '', text: 'Lifetime Warranty' },
+ { icon: '', text: 'EV Certified' },
  ].map((item, i) => (
  <div key={i} className="flex items-center gap-2">
  <span aria-hidden="true">{item.icon}</span>
@@ -285,13 +285,13 @@ export default function Home() {
  </div>
  <div>
  <p>
-  24/7 Emergency Service Available
+ 24/7 Emergency Service Available
  </p>
  <p>
  Power outage? Sparking wires? Call us anytime — day or night.
  </p>
- <a href="tel:+15555678658">
- (555) 567-VOLT
+ <a href="tel:[PHONE]">
+ [PHONE]
  </a>
  </div>
  </div>
@@ -316,7 +316,7 @@ export default function Home() {
  {/* Google Maps Embed */}
  <div className="reveal">
  <iframe
- src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110771.66236885537!2d-97.807658!3d30.267153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b599a0cc032f%3A0x5d9b464bd469d57a!2sAustin%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000000"
+ src="[WEBSITE]/maps/embed?pb=!1m18!1m12!1m3!1d110771.66236885537!2d-97.807658!3d30.267153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b599a0cc032f%3A0x5d9b464bd469d57a!2sAustin%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000000"
  width="100%"
  height="350"
 
@@ -341,7 +341,7 @@ export default function Home() {
  <article key={i} className="testimonial-card reveal">
  <div className="testimonial-stars" aria-label={`${t.rating} out of 5 stars`}>
  {[...Array(t.rating)].map((_, j) => (
- <span key={j} aria-hidden="true">★</span>
+ <span key={j} aria-hidden="true"></span>
  ))}
  </div>
  <p className="testimonial-text">&ldquo;{t.text}&rdquo;</p>
@@ -371,28 +371,28 @@ export default function Home() {
  <div className="contact-icon" aria-hidden="true"></div>
  <div>
  <p className="contact-label">Call Us</p>
- <a href="tel:+15555678658" className="contact-value">(555) 567-VOLT</a>
+ <a href="tel:[PHONE]" className="contact-value">[PHONE]</a>
  </div>
  </div>
  <div className="contact-item">
- <div className="contact-icon" aria-hidden="true">✉️</div>
+ <div className="contact-icon" aria-hidden="true"></div>
  <div>
  <p className="contact-label">Email Us</p>
- <a href="mailto:info@voltproelectric.com" className="contact-value">info@voltproelectric.com</a>
+ <a href="mailto:[EMAIL]" className="contact-value">[EMAIL]</a>
  </div>
  </div>
  <div className="contact-item">
  <div className="contact-icon" aria-hidden="true"></div>
  <div>
  <p className="contact-label">Visit Us</p>
- <p className="contact-value-muted">1234 Electric Ave, Austin, TX 78701</p>
+ <p className="contact-value-muted">[ADDRESS]</p>
  </div>
  </div>
  <div className="contact-item">
  <div className="contact-icon" aria-hidden="true"></div>
  <div>
  <p className="contact-label">WhatsApp</p>
- <a href="https://wa.me/15555678658" target="_blank" rel="noopener noreferrer" className="contact-value">Chat on WhatsApp</a>
+ <a href="https://wa.me/[PHONE]" target="_blank" rel="noopener noreferrer" className="contact-value">Chat on WhatsApp</a>
  </div>
  </div>
  </div>
@@ -402,10 +402,10 @@ export default function Home() {
  <p className="contact-label">Follow Us</p>
  <div>
  {[
- { label: 'Facebook', href: 'https://facebook.com/voltproelectric', icon: 'f' },
- { label: 'Instagram', href: 'https://instagram.com/voltproelectric', icon: 'ig' },
- { label: 'Google', href: 'https://google.com/maps?cid=voltproelectric', icon: 'G' },
- { label: 'Yelp', href: 'https://yelp.com/biz/voltproelectric', icon: 'y' },
+ { label: 'Facebook', href: '[FACEBOOK_URL]', icon: 'f' },
+ { label: 'Instagram', href: '[INSTAGRAM_URL]', icon: 'ig' },
+ { label: 'Google', href: '[WEBSITE]/maps?cid=voltproelectric', icon: 'G' },
+ { label: 'Yelp', href: '[YELP_URL]/voltproelectric', icon: 'y' },
  ].map((social, i) => (
  <a
  key={i}
@@ -425,16 +425,16 @@ export default function Home() {
  <div className="estimate-form reveal">
  {formStatus === 'sent' ? (
  <div className="form-success">
- <div className="form-success-icon" aria-hidden="true">✅</div>
+ <div className="form-success-icon" aria-hidden="true"></div>
  <h3 className="form-success-title">Request Sent!</h3>
- <p className="form-success-text">We&apos;ll get back to you within 1 business day. For emergencies, call (555) 567-VOLT.</p>
+ <p className="form-success-text">We&apos;ll get back to you within 1 business day. For emergencies, call [PHONE].</p>
  <button onClick={() => setFormStatus('idle')} className="btn-primary rounded-full px-6 py-3 font-bold">
  Send Another Request
  </button>
  </div>
  ) : (
  <form onSubmit={handleFormSubmit} noValidate>
- <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+ <input type="hidden" name="access_key" value="[WEB3FORMS_KEY]" />
  <input type="hidden" name="subject" value="New Estimate Request - VoltPro Electric" />
  <input type="checkbox" name="botcheck" />
 
@@ -451,7 +451,7 @@ export default function Home() {
  <div className="form-row">
  <div>
  <label htmlFor="phone" className="contact-label">Phone *</label>
- <input id="phone" name="phone" type="tel" required placeholder="(555) 000-0000" />
+ <input id="phone" name="phone" type="tel" required placeholder="[PHONE]" />
  </div>
  <div>
  <label htmlFor="service-type" className="contact-label">Service Needed</label>
@@ -497,13 +497,13 @@ export default function Home() {
  <div className="container">
  <div>
  <div className="flex items-center gap-3">
- <div className="w-8 h-8 rounded-lg flex items-center justify-center" aria-hidden="true">⚡</div>
+ <div className="w-8 h-8 rounded-lg flex items-center justify-center" aria-hidden="true"></div>
  <span>VoltPro Electric</span>
  </div>
  <div>
- <a href="tel:+15555678658">(555) 567-VOLT</a>
+ <a href="tel:[PHONE]">[PHONE]</a>
  <span>|</span>
- <a href="mailto:info@voltproelectric.com">info@voltproelectric.com</a>
+ <a href="mailto:[EMAIL]">[EMAIL]</a>
  </div>
  </div>
  <div className="footer-badges">
@@ -512,6 +512,7 @@ export default function Home() {
  ))}
  </div>
  <p className="footer-copy">&copy; 2024 VoltPro Electric. All rights reserved.</p>
+<div className="text-center py-3 text-xs opacity-50 hover:opacity-80 transition-opacity"><span>Designed by </span><a href="https://adeshpreet.vercel.app/" target="_blank" rel="noopener noreferrer" className="underline">Adeshpreet Singh</a></div>
  </div>
  </footer>
  </div>
