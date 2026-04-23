@@ -315,16 +315,7 @@ export default function Home() {
 
  {/* Google Maps Embed */}
  <div className="reveal">
- <iframe
- src="[WEBSITE]/maps/embed?pb=!1m18!1m12!1m3!1d110771.66236885537!2d-97.807658!3d30.267153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b599a0cc032f%3A0x5d9b464bd469d57a!2sAustin%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000000"
- width="100%"
- height="350"
-
- allowFullScreen
- loading="lazy"
- referrerPolicy="no-referrer-when-downgrade"
- title="VoltPro Electric service area map — Austin, TX"
- />
+ <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400 text-sm">Map View</div>
  </div>
  </div>
  </section>
