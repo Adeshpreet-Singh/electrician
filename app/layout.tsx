@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     url: "https://voltproelectric.com",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=1200&h=630&q=80",
+        url: "/images/photo-1621905252507-b35492cc74b4.jpg",
         width: 1200,
         height: 630,
         alt: "VoltPro Electric - Licensed Master Electricians",
@@ -30,9 +30,14 @@ export const metadata: Metadata = {
     description:
       "Residential and commercial electrical services, EV charging installation, panel upgrades, and 24/7 emergency repairs.",
     images: [
-      "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=1200&h=630&q=80",
+      "/images/photo-1621905252507-b35492cc74b4.jpg",
     ],
   },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({

@@ -1,3 +1,12 @@
+/* FONTS_INJECTED */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+:root {
+  --font-heading: 'Inter', serif;
+  --font-body: 'Inter', sans-serif;
+}
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
+body { font-family: var(--font-body); }
+
 /* ================================================================
    VOLTPRO ELECTRIC — Urgent Professional Design System
    Colors: Dark #0a0a0a + Yellow #ffd700
@@ -29,30 +38,13 @@
 /* CSS VARIABLES             */
 /* ========================= */
 :root {
-  /* Added: previously undefined variables */
-    --bg-primary: #ffffff;
-    --border: #e5e7eb;
-    --primary: #2563eb;
-    --radius-md: 0.5rem;
-    --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
-    --text-muted: #6b7280;
-    --text-primary: #1a1a2e;
-    --transition: all 0.3s ease;
-  --dark: #0a0a0a;
-  --dark-surface: #111111;
-  --dark-card: #161616;
-  --dark-border: #252525;
-  --accent: #ffd700;
-  --accent-dark: #b8960f;
-  --accent-glow: rgba(255, 215, 0, 0.3);
-  --red: #dc2626;
-  --red-dark: #b91c1c;
-  --white: #ffffff;
-  --gray-100: #f5f5f5;
-  --gray-300: #d4d4d4;
-  --gray-500: #a3a3a3;
-  --font-heading: 'Barlow Condensed', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --primary: #374151;
+  --secondary: #4b5563;
+  --accent: #f59e0b;
+  --bg: #f3f4f6;
+  --surface: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
 }
 
 /* ========================= */
@@ -967,8 +959,8 @@ body {
 /* SCROLL REVEAL             */
 /* ========================= */
 .reveal {
-  opacity: 0;
-  transform: translateY(40px);
+  opacity: 1;
+  transform: translateY(0);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
@@ -1310,3 +1302,13 @@ button, [class*="btn"], [class*="button"], [class*="cta"] {
   margin: 0 auto;
   padding: 0 2rem;
 }
+/* DESIGN_SYSTEM_INJECTED */
+body {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+.bg-primary { background-color: #374151 !important; }
+.bg-secondary { background-color: #4b5563 !important; }
+.text-primary { color: #374151 !important; }
+.text-accent { color: #f59e0b !important; }
+.bg-accent { background-color: #f59e0b !important; }
