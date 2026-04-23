@@ -72,7 +72,7 @@ export default function Home() {
  <span className="emergency-icon" aria-hidden="true"></span>
  <span>24/7 Emergency Electrical Service</span>
  <span className="emergency-divider" aria-hidden="true">|</span>
- <a href="tel:[PHONE]" className="emergency-phone">[PHONE]</a>
+ <a href="tel:+91 98765 43210" className="emergency-phone">+91 98765 43210</a>
  </div>
 
  <header>
@@ -140,8 +140,8 @@ export default function Home() {
  <button onClick={() => scrollToSection('contact')} className="btn-primary rounded-full px-8 py-4 text-base font-bold">
  Get Free Estimate
  </button>
- <a href="tel:[PHONE]" className="btn-outline rounded-full px-8 py-4 text-base font-bold inline-block text-center">
- Call [PHONE]
+ <a href="tel:+91 98765 43210" className="btn-outline rounded-full px-8 py-4 text-base font-bold inline-block text-center">
+ Call +91 98765 43210
  </a>
  </div>
  <div className="hero-stats">
@@ -290,8 +290,8 @@ export default function Home() {
  <p>
  Power outage? Sparking wires? Call us anytime — day or night.
  </p>
- <a href="tel:[PHONE]">
- [PHONE]
+ <a href="tel:+91 98765 43210">
+ +91 98765 43210
  </a>
  </div>
  </div>
@@ -371,7 +371,7 @@ export default function Home() {
  <div className="contact-icon" aria-hidden="true"></div>
  <div>
  <p className="contact-label">Call Us</p>
- <a href="tel:[PHONE]" className="contact-value">[PHONE]</a>
+ <a href="tel:+91 98765 43210" className="contact-value">+91 98765 43210</a>
  </div>
  </div>
  <div className="contact-item">
@@ -392,7 +392,7 @@ export default function Home() {
  <div className="contact-icon" aria-hidden="true"></div>
  <div>
  <p className="contact-label">WhatsApp</p>
- <a href="https://wa.me/[PHONE]" target="_blank" rel="noopener noreferrer" className="contact-value">Chat on WhatsApp</a>
+ <a href="https://wa.me/+91 98765 43210" target="_blank" rel="noopener noreferrer" className="contact-value">Chat on WhatsApp</a>
  </div>
  </div>
  </div>
@@ -427,7 +427,7 @@ export default function Home() {
  <div className="form-success">
  <div className="form-success-icon" aria-hidden="true"></div>
  <h3 className="form-success-title">Request Sent!</h3>
- <p className="form-success-text">We&apos;ll get back to you within 1 business day. For emergencies, call [PHONE].</p>
+ <p className="form-success-text">We&apos;ll get back to you within 1 business day. For emergencies, call +91 98765 43210.</p>
  <button onClick={() => setFormStatus('idle')} className="btn-primary rounded-full px-6 py-3 font-bold">
  Send Another Request
  </button>
@@ -451,7 +451,7 @@ export default function Home() {
  <div className="form-row">
  <div>
  <label htmlFor="phone" className="contact-label">Phone *</label>
- <input id="phone" name="phone" type="tel" required placeholder="[PHONE]" />
+ <input id="phone" name="phone" type="tel" required placeholder="+91 98765 43210" />
  </div>
  <div>
  <label htmlFor="service-type" className="contact-label">Service Needed</label>
@@ -501,7 +501,7 @@ export default function Home() {
  <span>VoltPro Electric</span>
  </div>
  <div>
- <a href="tel:[PHONE]">[PHONE]</a>
+ <a href="tel:+91 98765 43210">+91 98765 43210</a>
  <span>|</span>
  <a href="mailto:[EMAIL]">[EMAIL]</a>
  </div>
