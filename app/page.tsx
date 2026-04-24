@@ -72,7 +72,7 @@ export default function Home() {
  <span className="emergency-icon" aria-hidden="true"></span>
  <span>24/7 Emergency Electrical Service</span>
  <span className="emergency-divider" aria-hidden="true">|</span>
- <a href="tel:+91 98765 43210" className="emergency-phone">+91 98765 43210</a>
+ <a href="tel:+1-800-555-0210" className="emergency-phone">+1-800-555-0210</a>
  </div>
 
  <header>
@@ -140,8 +140,8 @@ export default function Home() {
  <button onClick={() => scrollToSection('contact')} className="btn-primary rounded-full px-8 py-4 text-base font-bold">
  Get Free Estimate
  </button>
- <a href="tel:+91 98765 43210" className="btn-outline rounded-full px-8 py-4 text-base font-bold inline-block text-center">
- Call +91 98765 43210
+ <a href="tel:+1-800-555-0210" className="btn-outline rounded-full px-8 py-4 text-base font-bold inline-block text-center">
+ Call +1-800-555-0210
  </a>
  </div>
  <div className="hero-stats">
@@ -195,7 +195,7 @@ export default function Home() {
  <div className="container">
  <div className="section-header">
  <span className="badge">Our Work</span>
- <h2 id="ba-heading" className="section-title">Before &amp; After</h2>
+ <h2 id="ba-heading" className="section-title">Before & After</h2>
  <p className="section-subtitle">See the VoltPro difference. Real projects, real results.</p>
  </div>
  <div className="grid md:grid-cols-2 gap-8">
@@ -290,8 +290,8 @@ export default function Home() {
  <p>
  Power outage? Sparking wires? Call us anytime — day or night.
  </p>
- <a href="tel:+91 98765 43210">
- +91 98765 43210
+ <a href="tel:+1-800-555-0210">
+ +1-800-555-0210
  </a>
  </div>
  </div>
@@ -311,11 +311,11 @@ export default function Home() {
  <span key={i} className="area-tag">{area}</span>
  ))}
  </div>
- <p className="areas-counties">Travis County &bull; Williamson County &bull; Hays County &bull; Bastrop County</p>
+ <p className="areas-counties">Travis County • Williamson County • Hays County • Bastrop County</p>
 
  {/* Google Maps Embed */}
  <div className="reveal">
- <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400 text-sm">Map View</div>
+ <div className="w-full h-64 bg-[#1a1a1a] rounded-lg flex items-center justify-center text-[#666] text-sm">Map View</div>
  </div>
  </div>
  </section>
@@ -335,7 +335,7 @@ export default function Home() {
  <span key={j} aria-hidden="true"></span>
  ))}
  </div>
- <p className="testimonial-text">&ldquo;{t.text}&rdquo;</p>
+ <p className="testimonial-text">"{t.text}"</p>
  <div className="testimonial-author">
  <p className="testimonial-name">{t.name}</p>
  <p className="testimonial-location">{t.role}</p>
@@ -352,7 +352,7 @@ export default function Home() {
  <div className="section-header">
  <span className="badge">Get Started</span>
  <h2 id="contact-heading" className="section-title">Request Your Free Estimate</h2>
- <p className="section-subtitle">Tell us about your electrical needs and we&apos;ll provide a detailed estimate. No obligations, no surprises.</p>
+ <p className="section-subtitle">Tell us about your electrical needs and we'll provide a detailed estimate. No obligations, no surprises.</p>
  </div>
  <div className="contact-grid">
  {/* Contact Info */}
@@ -362,28 +362,28 @@ export default function Home() {
  <div className="contact-icon" aria-hidden="true"></div>
  <div>
  <p className="contact-label">Call Us</p>
- <a href="tel:+91 98765 43210" className="contact-value">+91 98765 43210</a>
+ <a href="tel:+1-800-555-0210" className="contact-value">+1-800-555-0210</a>
  </div>
  </div>
  <div className="contact-item">
  <div className="contact-icon" aria-hidden="true"></div>
  <div>
  <p className="contact-label">Email Us</p>
- <a href="mailto:[EMAIL]" className="contact-value">[EMAIL]</a>
+ <a href="mailto:info@electrician.com" className="contact-value">info@electrician.com</a>
  </div>
  </div>
  <div className="contact-item">
  <div className="contact-icon" aria-hidden="true"></div>
  <div>
  <p className="contact-label">Visit Us</p>
- <p className="contact-value-muted">[ADDRESS]</p>
+ <p className="contact-value-muted">350 Fifth Avenue, New York, NY 10118</p>
  </div>
  </div>
  <div className="contact-item">
  <div className="contact-icon" aria-hidden="true"></div>
  <div>
  <p className="contact-label">WhatsApp</p>
- <a href="https://wa.me/+91 98765 43210" target="_blank" rel="noopener noreferrer" className="contact-value">Chat on WhatsApp</a>
+ <a href="https://wa.me/+1-800-555-0210" target="_blank" rel="noopener noreferrer" className="contact-value">Chat on WhatsApp</a>
  </div>
  </div>
  </div>
@@ -395,7 +395,7 @@ export default function Home() {
  {[
  { label: 'Facebook', href: '[FACEBOOK_URL]', icon: 'f' },
  { label: 'Instagram', href: '[INSTAGRAM_URL]', icon: 'ig' },
- { label: 'Google', href: '[WEBSITE]/maps?cid=voltproelectric', icon: 'G' },
+ { label: 'Google', href: 'https://electrician.com/maps?cid=voltproelectric', icon: 'G' },
  { label: 'Yelp', href: '[YELP_URL]/voltproelectric', icon: 'y' },
  ].map((social, i) => (
  <a
@@ -418,14 +418,14 @@ export default function Home() {
  <div className="form-success">
  <div className="form-success-icon" aria-hidden="true"></div>
  <h3 className="form-success-title">Request Sent!</h3>
- <p className="form-success-text">We&apos;ll get back to you within 1 business day. For emergencies, call +91 98765 43210.</p>
+ <p className="form-success-text">We'll get back to you within 1 business day. For emergencies, call +1-800-555-0210.</p>
  <button onClick={() => setFormStatus('idle')} className="btn-primary rounded-full px-6 py-3 font-bold">
  Send Another Request
  </button>
  </div>
  ) : (
  <form onSubmit={handleFormSubmit} noValidate>
- <input type="hidden" name="access_key" value="[WEB3FORMS_KEY]" />
+ <input type="hidden" name="access_key" value="00000000-0000-0000-0000-000000000000" />
  <input type="hidden" name="subject" value="New Estimate Request - VoltPro Electric" />
  <input type="checkbox" name="botcheck" />
 
@@ -442,7 +442,7 @@ export default function Home() {
  <div className="form-row">
  <div>
  <label htmlFor="phone" className="contact-label">Phone *</label>
- <input id="phone" name="phone" type="tel" required placeholder="+91 98765 43210" />
+ <input id="phone" name="phone" type="tel" required placeholder="+1-800-555-0210" />
  </div>
  <div>
  <label htmlFor="service-type" className="contact-label">Service Needed</label>
@@ -492,9 +492,9 @@ export default function Home() {
  <span>VoltPro Electric</span>
  </div>
  <div>
- <a href="tel:+91 98765 43210">+91 98765 43210</a>
+ <a href="tel:+1-800-555-0210">+1-800-555-0210</a>
  <span>|</span>
- <a href="mailto:[EMAIL]">[EMAIL]</a>
+ <a href="mailto:info@electrician.com">info@electrician.com</a>
  </div>
  </div>
  <div className="footer-badges">
@@ -502,7 +502,7 @@ export default function Home() {
  <span key={i}>{b}</span>
  ))}
  </div>
- <p className="footer-copy">&copy; 2024 VoltPro Electric. All rights reserved.</p>
+ <p className="footer-copy">© 2024 VoltPro Electric. All rights reserved.</p>
 <div className="text-center py-3 text-xs opacity-50 hover:opacity-80 transition-opacity"><span>Designed by </span><a href="https://adeshpreet.vercel.app/" target="_blank" rel="noopener noreferrer" className="underline">Adeshpreet Singh</a></div>
  </div>
  </footer>
